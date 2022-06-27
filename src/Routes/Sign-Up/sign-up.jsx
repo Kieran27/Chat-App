@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useUserAuth } from "../../Auth/authentication-context.js"
 import { updateProfile } from "firebase/auth"
+import { useNavigate } from "react-router-dom"
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
@@ -32,7 +34,7 @@ const SignUp = () => {
     try {
       await signUp(email, password)
       handleUpdateProfile()
-      console.log('Success!')
+      navigate('/chat')
     } catch (error) {
       console.log(error.message)
     }

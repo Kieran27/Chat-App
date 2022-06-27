@@ -8,7 +8,6 @@ const ChatMessage = ({message}) => {
   return (
     <div>
       <p>{message.message}</p>
-      <p>{user.displayName}</p>
     </div>
   )
 }

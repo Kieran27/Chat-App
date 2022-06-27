@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { UserAuthContextProvider } from "./Auth/authentication-context.js"
 import HomePage from "./Routes/Homepage/homepage.jsx"
 import Profile from "./Routes/Profile/profile.jsx"
@@ -10,7 +10,7 @@ import Footer from "./Components/Footer/footer.jsx"
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <UserAuthContextProvider>
         <Header />
         <main>
@@ -24,7 +24,7 @@ const App = () => {
         </main>
         <Footer />
       </UserAuthContextProvider>
-  </BrowserRouter>
+  </HashRouter>
   )
 }
 

@@ -32,15 +32,16 @@ const ChatInput = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
+      <input
+        type="text"
         name="msg-box"
         id="msg-box"
         cols="50"
         rows="5"
         placeholder="message"
         onChange={handleChange}
-        value={msg}>
-      </textarea>
+        value={msg}
+      />
       <input
         type="submit"
         value="send"

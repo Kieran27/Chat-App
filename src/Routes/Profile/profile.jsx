@@ -7,6 +7,7 @@ import { useUserAuth } from "../../Auth/authentication-context.js"
 const Profile = () => {
 
   const [imgFile, setImgFile] = useState(null)
+  const [newName, setNewName] = useState("")
 
   const {user} = useUserAuth()
 
@@ -39,12 +40,28 @@ const Profile = () => {
     }
   }
 
+  const handleName = (e) => {
+    setNewName(e.target.value)
+  }
+
+  const handleNameChange = async (e) => {
+    e.preventDefault();
+    await updateProfile(user, {
+      displayName: newName
+    })
+    window.reload();
+  }
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="Img-Avatar"></label>
         <input type="file" onChange={handleChange}/>
         <input type="submit" value="upload"/>
+      </form>
+      <form onSubmit={handleNameChange}>
+        <label htmlFor="New Username"></label>
+        <input type="text" value={newName} onChange={handleName}/>
+        <input type="submit"/>
       </form>
       <h3>{user?.displayName}</h3>
       <h3>{user?.email}</h3>

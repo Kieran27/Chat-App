@@ -3,9 +3,9 @@ import { db } from "../../firebase-config.js"
 import { addDoc, collection, Timestamp } from "firebase/firestore"
 import { useUserAuth } from "../../Auth/authentication-context.js"
 
-const ChatInput = () => {
+const ChatInput = ({currentChat}) => {
   const [msg, setMsg] = useState("");
-  const msgRef = collection(db, 'messages')
+  const msgRef = !currentChat ? collection(db, 'messages') : collection(db, currentChat)
   const { user } = useUserAuth()
 
   const handleChange = (e) => {
@@ -41,6 +41,7 @@ const ChatInput = () => {
         placeholder="message"
         onChange={handleChange}
         value={msg}
+        required
       />
       <input
         type="submit"

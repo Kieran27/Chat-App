@@ -5,26 +5,27 @@ import Profile from "./Routes/Profile/profile.jsx"
 import SignUp from "./Routes/Sign-Up/sign-up.jsx"
 import Login from "./Routes/Login/login.jsx"
 import Chat from "./Routes/Chat/chat.jsx"
+import ChatRoomPage from "./Routes/Chatroom-Page/chatroom-page.jsx"
 import Header from "./Components/Header/header.jsx"
 import Footer from "./Components/Footer/footer.jsx"
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <UserAuthContextProvider>
         <Header />
         <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/register" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/chat" element={<Chat />} />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/register" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/chat" element={<ChatRoomPage />} />
+            </Routes>
         </main>
         <Footer />
       </UserAuthContextProvider>
-  </HashRouter>
+  </BrowserRouter>
   )
 }
 

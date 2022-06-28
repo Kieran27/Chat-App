@@ -1,43 +1,39 @@
 import { useState, useEffect } from 'react'
 import ChatInput from "../../Components/Chat-Input/chat-input.jsx"
 import ChatMessage from "../../Components/Chat-Message/chat-message.jsx"
+import ChatRoomNav from "../../Components/ChatRoom-Nav/chat-room-nav.jsx"
 import { db } from "../../firebase-config.js"
-import { collection, getDocs, onSnapshot } from "firebase/firestore"
+import "./chat.css"
+import { collection, getDocs, onSnapshot, limit, orderBy, query } from "firebase/firestore"
 
-const Chat = () => {
+const Chat = ({currentChat}) => {
   const [ messages, setMessages ] = useState(null)
   const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
-    const msgRef = collection(db, 'messages')
-    const unsub = onSnapshot(msgRef, (snapshot) => {
+    const msgRef = !currentChat ? collection(db, 'messages') : collection(db, currentChat)
+    const msgQuery = query(msgRef, orderBy("timestamp"), limit(25))
+    const unsub = onSnapshot(msgQuery, (snapshot) => {
       const messageData = (snapshot.docs.map((docs) => ({...docs.data(), id: docs.id})))
-      setMessages(messageData.sort((a, b) => (a.timestamp.seconds > b.timestamp.seconds)
-        ? 1
-        : -1
-      ))
+      setMessages(messageData)
       setLoading(false)
     })
     return unsub
-  }, [])
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data = await getDocs(msgRef)
-  //     setMessages(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-  //   }
-  //   getData()
-  // }, [])
+  }, [currentChat])
 
   return (
-    <>
-    {loading && <p>Loading</p>}
-    <div>This Is The ChatRoom</div>
-    {messages?.map((msg) => {
-      return <ChatMessage key={msg.id} message={msg} />
-    })}
-    <ChatInput />
-    </>
+    <div className="chat-room-container">
+      <div className="chat-room-container-body">
+        {loading && <p>Loading</p>}
+        <h2>Chat Room {currentChat}</h2>
+          {messages?.map((msg) => {
+            return <ChatMessage key={msg.id} message={msg} />
+          })}
+      </div>
+        <div className="chat-room-container-footer">
+          <ChatInput currentChat={currentChat} />
+        </div>
+    </div>
   )
 }
 

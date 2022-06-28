@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import Chat from "../Chat/chat.jsx"
 import ChatRoomNav from "../../Components/ChatRoom-Nav/chat-room-nav.jsx"
+import Header from "../../Components/Header/header.jsx"
+import Footer from "../../Components/Footer/footer.jsx"
 import "./chatroom-page.css"
 
 const ChatRoomPage = () => {
@@ -17,10 +19,14 @@ const ChatRoomPage = () => {
   }, [currentChat])
 
   return (
-    <div className="chat-page-container">
-      <ChatRoomNav changeChat={changeChat} />
-      <Chat currentChat={currentChat} />
-    </div>
+    <>
+      <Header />
+      <div className="chat-page-container">
+        <ChatRoomNav changeChat={changeChat} />
+        <Chat currentChat={currentChat} />
+      </div>
+      <Footer />
+    </>
   )
 }
 

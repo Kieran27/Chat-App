@@ -15,7 +15,7 @@ const Header = () => {
     <header className="header">
       <div className="header-left">
         <Link to="/">
-          AppName
+          <h1 style={{margin: '0'}}>Chatter</h1>
         </Link>
       </div>
       <div className="header-right">

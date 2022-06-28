@@ -1,11 +1,18 @@
 *, *::before, *::after {
   box-sizing: border-box;
-  font-family: Helvetica;
+}
+
+:root {
+  --Clr-Primary: #22d3ee;
+  --Clr-Tertiary: #a5f3fc;
+
+  --Font-Primary: 'Manrope', sans-serif;
 }
 
 /* Style for sticky footer */
 html, body, #root {
   height: 100%;
+  font-family: 'Manrope', sans-serif;
 }
 
 /* Style enclosing element which encloses all react content */
@@ -39,6 +46,14 @@ ul {
 
 li {
   list-style-type: none;
+}
+
+button {
+  font-family: var(--Font-Primary);
+}
+
+input {
+  font-family: var(--Font-Primary);
 }
 
 .wrapper {

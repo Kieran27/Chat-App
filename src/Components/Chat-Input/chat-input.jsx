@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { db } from "../../firebase-config.js"
 import { addDoc, collection, Timestamp } from "firebase/firestore"
 import { useUserAuth } from "../../Auth/authentication-context.js"
+import "./chat-input.css"
 
 const ChatInput = ({currentChat}) => {
   const [msg, setMsg] = useState("");
@@ -31,7 +32,7 @@ const ChatInput = ({currentChat}) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='chat-input' onSubmit={handleSubmit}>
       <input
         type="text"
         name="msg-box"
@@ -41,6 +42,7 @@ const ChatInput = ({currentChat}) => {
         placeholder="message"
         onChange={handleChange}
         value={msg}
+        autoComplete="off" 
         required
       />
       <input

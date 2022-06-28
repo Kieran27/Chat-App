@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useUserAuth } from "../../Auth/authentication-context.js"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
+import "./login.css"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -27,27 +28,38 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="Email"></label>
-      <input
-        id='email'
-        value={email}
-        type="email"
-        onChange={handleChange}
-        placeholder="email"
-        required
-      />
-      <label htmlFor="Password"></label>
-      <input
-        id='password'
-        value={password}
-        type="password"
-        onChange={handleChange}
-        placeholder="password"
-        required
-      />
-      <input type="submit" value="Sign Up!"/>
-    </form>
+    <>
+    <h2>Login To Chat</h2>
+    <p>
+      Don't have an account?
+      <Link to="/register">
+        Register here.
+      </Link>
+    </p>
+    <div className="login-form-container">
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="Email"></label>
+        <input
+          id='email'
+          value={email}
+          type="email"
+          onChange={handleChange}
+          placeholder="email"
+          required
+        />
+        <label htmlFor="Password"></label>
+        <input
+          id='password'
+          value={password}
+          type="password"
+          onChange={handleChange}
+          placeholder="password"
+          required
+        />
+        <input type="submit" value="Login"/>
+      </form>
+    </div>
+    </>
   )
 }
 

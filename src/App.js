@@ -13,7 +13,6 @@ const App = () => {
   return (
     <BrowserRouter>
       <UserAuthContextProvider>
-        <Header />
         <main>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -23,7 +22,6 @@ const App = () => {
               <Route path="/chat" element={<ChatRoomPage />} />
             </Routes>
         </main>
-        <Footer />
       </UserAuthContextProvider>
   </BrowserRouter>
   )

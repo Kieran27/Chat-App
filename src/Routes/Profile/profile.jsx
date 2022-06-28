@@ -3,6 +3,8 @@ import { auth, storage } from "../../firebase-config.js"
 import { getIdToken, updateProfile } from "firebase/auth"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { useUserAuth } from "../../Auth/authentication-context.js"
+import Header from "../../Components/Header/header.jsx"
+import Footer from "../../Components/Footer/footer.jsx"
 
 const Profile = () => {
 
@@ -52,6 +54,8 @@ const Profile = () => {
     window.reload();
   }
   return (
+    <>
+    <Header />
     <div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="Img-Avatar"></label>
@@ -70,6 +74,8 @@ const Profile = () => {
       }} src={user?.photoURL} alt=""/>
       <button onClick={handleClick}>Delete Account</button>
     </div>
+    <Footer />
+    </>
   )
 }
 

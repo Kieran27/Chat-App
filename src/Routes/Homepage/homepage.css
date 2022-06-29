@@ -48,6 +48,33 @@
   flex-direction: column;
 }
 
+.homepage-right-header {
+  display: none;
+  text-align: center;
+  color: var(--Clr-Dark-Gray);
+}
+
+.homepage-right-header p {
+  letter-spacing: 1.2px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.homepage-right-header img {
+  margin-top: 3rem;
+  width: 40%;
+}
+
+.homepage-right-footer {
+  flex-grow: 0.3;
+  display: none;
+  justify-content: center;
+}
+
+.homepage-right-footer img {
+  width: 30%;
+}
+
 .homepage-right-form-container {
   display: flex;
   flex-direction: column;
@@ -65,5 +92,18 @@
 
   .homepage-right {
     width: 100%;
+    justify-content: flex-start;
   }
+
+  .homepage-right-header {
+    display: block;
+    text-align: center;
+    color: var(--Clr-Dark-Gray);
+    flex-grow: 0.4;
+  }
+
+  .homepage-right-footer {
+    display: flex;
+  }
+
 }

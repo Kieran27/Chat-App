@@ -10,7 +10,7 @@ const HomePage = () => {
 
   const { user } = useUserAuth();
   const navigate = useNavigate();
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(true)
 
   useEffect(() => {
     if (user) {
@@ -35,11 +35,18 @@ const HomePage = () => {
         </div>
       </div>
       <div className="homepage-right">
+        <div className="homepage-right-header">
+          <h1>Chatter</h1>
+          <p>Real Time Messaging App. Talk with your friends!</p>
+        </div>
         {
           login
            ? <Login changeLoginState={changeLoginState} />
            : <SignUp changeLoginState={changeLoginState} />
         }
+        <div className="homepage-right-footer">
+          <img src={HeroImage} alt=""/>
+        </div>
       </div>
     </div>
     </>

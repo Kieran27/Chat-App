@@ -5,6 +5,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { useUserAuth } from "../../Auth/authentication-context.js"
 import Header from "../../Components/Header/header.jsx"
 import Footer from "../../Components/Footer/footer.jsx"
+import "./profile.css"
 
 const Profile = () => {
 
@@ -56,7 +57,15 @@ const Profile = () => {
   return (
     <>
     <Header />
-    <div>
+    <div className="profile-container">
+      <div className="profile-container-avatar-container">
+        <div className="profile-avatar">
+
+        </div>
+      </div>
+      <div className="profile-info-container">
+
+      </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="Img-Avatar"></label>
         <input type="file" onChange={handleChange}/>

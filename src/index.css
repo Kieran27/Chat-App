@@ -5,6 +5,9 @@
 :root {
   --Clr-Primary: #22d3ee;
   --Clr-Tertiary: #a5f3fc;
+  --Clr-Dark-Gray: #374151;
+  --Clr-Mid-Gray: #9ca3af;
+  --Clr-Light-Gray: #e5e7eb;
 
   --Font-Primary: 'Manrope', sans-serif;
 }

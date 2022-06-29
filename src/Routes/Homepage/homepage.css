@@ -56,5 +56,14 @@
 .homepage-right-form-container form {
   display: flex;
   flex-direction: column;
+}
 
+@media only screen and (max-width: 600px) {
+  .homepage-left {
+    display: none;
+  }
+
+  .homepage-right {
+    width: 100%;
+  }
 }

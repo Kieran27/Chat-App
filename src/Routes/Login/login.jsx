@@ -3,7 +3,7 @@ import { useUserAuth } from "../../Auth/authentication-context.js"
 import { useNavigate, Link } from "react-router-dom"
 import "./login.css"
 
-const Login = () => {
+const Login = ({changeLoginState}) => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -29,36 +29,48 @@ const Login = () => {
 
   return (
     <>
-    <h2>Login To Chat</h2>
-    <p>
-      Don't have an account?
-      <Link to="/register">
-        Register here.
-      </Link>
-    </p>
-    <div className="login-form-container">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="Email"></label>
-        <input
-          id='email'
-          value={email}
-          type="email"
-          onChange={handleChange}
-          placeholder="email"
-          required
-        />
-        <label htmlFor="Password"></label>
-        <input
-          id='password'
-          value={password}
-          type="password"
-          onChange={handleChange}
-          placeholder="password"
-          required
-        />
-        <input type="submit" value="Login"/>
-      </form>
-    </div>
+      <h2>Login To Chat</h2>
+      <div className="login-form-container">
+        <form onSubmit={handleSubmit}>
+          <div className="form-input-container">
+            <label htmlFor="Email">Email</label>
+            <input
+              id='email'
+              value={email}
+              type="email"
+              onChange={handleChange}
+              placeholder="email"
+              required
+            />
+          </div>
+          <div className="form-input-container">
+            <label htmlFor="Password">Password</label>
+            <input
+              id='password'
+              value={password}
+              type="password"
+              onChange={handleChange}
+              placeholder="password"
+              required
+            />
+          </div>
+          <input
+           className="btn-submit"
+           type="submit"
+           value="Login"
+          />
+        </form>
+      </div>
+      <div className="account-switch-container">
+        <p className='no-account-text'>
+          Don't have an account?
+          <span>
+            <button onClick={changeLoginState}>
+              Register Here.
+            </button>
+          </span>
+        </p>
+      </div>
     </>
   )
 }

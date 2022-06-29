@@ -1,12 +1,77 @@
 .login-form-container {
+  width: 100%;
   max-width: 600px;
 }
 
 .login-form-container form {
-  display: flex;
-  flex-direction: column;
+  border-radius: 10px;
+	box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  padding: 2rem;
+  margin: 0 1rem 0.5rem 1rem;
 }
 
-.login-form-container input {
+.form-input-container {
+  width: 100%;
+  margin-bottom: 1rem;
+}
 
+.form-input-container label {
+  display: block;
+  color: var(--Clr-Dark-Gray);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form-input-container input {
+  border: thin solid var(--Clr-Light-Gray);
+  width: 100%;
+  padding: 0.6rem 1rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  border-radius: 5px;
+  color: var(--Clr-Mid-Gray);
+  font-size: 1rem;
+}
+
+.btn-submit  {
+  margin-top: 0.5rem;
+  border: none;
+  width: 100%;
+  color: white;
+  background: var(--Clr-Primary);
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  transition: 0.2s;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.btn-submit:hover  {
+  background: var(--Clr-Tertiary);
+}
+
+.account-switch-container {
+  display: flex;
+  justify-content: center;
+}
+
+.account-switch-container button {
+  background: none;
+  border: none;
+  letter-spacing: 1.2px;
+  color: var(--Clr-Primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.no-account-text {
+  color: var(--Clr-Dark-Gray);
+  font-size: 0.85rem;
+  margin: 0.5rem;
+  letter-spacing: 1.2px;
+}
+
+.no-account-text span {
+  margin-left: 0.375rem;
 }

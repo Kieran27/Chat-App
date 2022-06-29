@@ -1,20 +1,26 @@
-import {useEffect} from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { useUserAuth } from "../../Auth/authentication-context.js"
 import HeroImage from "../../Assets/Images/undraw_real_time_collaboration_c62i.svg"
 import Login from "../Login/login.jsx"
+import SignUp from "../Sign-Up/sign-up.jsx"
 import "./homepage.css"
 
 const HomePage = () => {
 
   const { user } = useUserAuth();
   const navigate = useNavigate();
+  const [login, setLogin] = useState(false)
 
   useEffect(() => {
     if (user) {
       navigate("/chat")
     }
   }, [])
+
+  const changeLoginState = () => {
+    setLogin(login => login = !login)
+  }
 
   return (
     <>
@@ -29,13 +35,11 @@ const HomePage = () => {
         </div>
       </div>
       <div className="homepage-right">
-        <Login />
-        <Link to="/register">
-          SignUp
-        </Link>
-        <Link to="/login">
-          Login
-        </Link>
+        {
+          login
+           ? <Login changeLoginState={changeLoginState} />
+           : <SignUp changeLoginState={changeLoginState} />
+        }
       </div>
     </div>
     </>

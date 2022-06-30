@@ -1,7 +1,9 @@
 .chat-room-container {
   display: flex;
   flex-direction: column;
-  min-height: 90vh;
+  padding: 1.5rem 0 0 1.5rem;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .chat-room-container h2 {
@@ -10,10 +12,12 @@
 
 .chat-room-container-body {
   flex-grow: 1;
+  /* overflow-y: scroll; */
+  margin-bottom: 0;
 }
 
 .chat-room-container-footer {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  margin-bottom: 1rem;
+  width: 100%;
 }

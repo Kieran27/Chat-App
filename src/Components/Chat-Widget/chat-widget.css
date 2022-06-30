@@ -1,0 +1,32 @@
+.chat-widget {
+  padding: 1rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chat-widget:hover {
+  background: var(--Clr-Very-Light-Gray);
+  border-radius: 10px;
+}
+
+.chat-widget-thumbnail-container {
+  width: 50px;
+  height: 50px;
+  background: green;
+  border-radius: 50%;
+  background-image: url(https://static.wixstatic.com/media/713b90_7841ba78e810446f8765776b69ee76e3~mv2.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.chat-widget-info-container {
+  overflow: hidden;
+}
+
+.chat-widget-info-container h5 {
+  margin: 0;
+}

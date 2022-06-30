@@ -1,4 +1,20 @@
+.chat-input {
+  background: white;
+  padding-top: 0.8rem;
+  padding-bottom: 1rem;
+  padding-right: 1.5rem;
+  width: 100%;
+}
+
 .chat-input input[type=text] {
   padding: 1rem;
-  width: 1000px;
+  width: 100%;
+  position: relative;
+}
+
+.chat-input input[type=submit] {
+  position: absolute;
+  margin-right: 2.5rem;
+  right: 0;
+  top: 32.5%;
 }

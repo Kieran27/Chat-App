@@ -36,7 +36,7 @@ const SignUp = ({changeLoginState}) => {
     try {
       await signUp(email, password)
       await handleUpdateProfile()
-      navigate('/chat')
+      // navigate('/chat')
     } catch (error) {
       console.log(error.message)
     }

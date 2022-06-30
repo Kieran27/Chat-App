@@ -1,4 +1,5 @@
 .chat-page-container {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  height: calc(100vh - 85px)
 }

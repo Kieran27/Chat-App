@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react"
-import { collection, doc, addDoc, setDoc, onSnapshot } from "firebase/firestore"
+import {
+   collection,
+   doc,
+   addDoc,
+   setDoc,
+   onSnapshot
+  } from "firebase/firestore"
 import { db } from "../../firebase-config.js"
 import "./chat-room-nav.css"
+import { HiSearch } from "react-icons/hi";
+import ChatWidget from "../../Components/Chat-Widget/chat-widget.jsx"
 
 const ChatRoomNav = ({changeChat}) => {
 
@@ -37,15 +45,15 @@ const ChatRoomNav = ({changeChat}) => {
     <aside className="chat-room-nav-container">
       <h2>Chats</h2>
       <div className="chat-room-nav-container-body">
+        <div className="chat-room-nav-search-container">
+          <HiSearch className='search-icon' />
+          <input type="search" placeholder="search chatter"/>
+        </div>
         <nav>
           <ul>
             {chatroomCollection?.map((doc) => {
               return (
-                <li key={doc.id}>
-                  <button onClick={changeChat} style={{marginBottom: '1rem'}}>
-                    {doc.name}
-                  </button>
-                </li>
+                <ChatWidget key={doc.id} chat={doc} changeChat={changeChat} />
               )
             }
           )}
@@ -54,9 +62,17 @@ const ChatRoomNav = ({changeChat}) => {
       </div>
       <div className="chat-room-nav-container-footer">
         <form onSubmit={handleSubmit}>
-          <label htmlFor="Create Chat">Create-Chat</label>
-          <input value={chatroom} type="text" onChange={handleChange}/>
-          <input type="submit"/>
+          <div className="form-input-container">
+            <label htmlFor="Create Chat">Create-Chat</label>
+            <input
+             value={chatroom}
+             type="text"
+             onChange={handleChange}
+             placeholder="chat name"
+             required
+            />
+          </div>
+          <input className='btn-submit' type="submit"/>
         </form>
       </div>
     </aside>

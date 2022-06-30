@@ -4,7 +4,7 @@ import { addDoc, collection, Timestamp } from "firebase/firestore"
 import { useUserAuth } from "../../Auth/authentication-context.js"
 import "./chat-input.css"
 
-const ChatInput = ({currentChat}) => {
+const ChatInput = ({currentChat, scrollIntoView}) => {
   const [msg, setMsg] = useState("");
   const msgRef = !currentChat ? collection(db, 'messages') : collection(db, currentChat)
   const { user } = useUserAuth()
@@ -29,6 +29,7 @@ const ChatInput = ({currentChat}) => {
       timestamp: Timestamp.now(),
       userId: user.uid
     })
+    scrollIntoView()
   }
 
   return (
@@ -42,7 +43,7 @@ const ChatInput = ({currentChat}) => {
         placeholder="message"
         onChange={handleChange}
         value={msg}
-        autoComplete="off" 
+        autoComplete="off"
         required
       />
       <input

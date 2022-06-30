@@ -59,6 +59,10 @@ input {
   font-family: var(--Font-Primary);
 }
 
+fieldset {
+  border: none;
+}
+
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;

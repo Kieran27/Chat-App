@@ -25,13 +25,17 @@ const Header = () => {
         </Link>
       </div>
       <div className="header-right">
-        <div
-         className="header-right-profile-container"
-         style={profileContainer}
-         onClick={handleClick}
+        <button
+          className="profile-popup-wrapper-btn"
+          onClick={handleClick}
         >
-        {showPopup && <ProfilePopup />}
-        </div>
+          <div
+           className="header-right-profile-container"
+           style={profileContainer}
+          >
+          {showPopup && <ProfilePopup />}
+          </div>
+        </button>
       </div>
     </header>
   )

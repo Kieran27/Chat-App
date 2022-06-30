@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 1.5rem;;
   border-bottom: 1px solid black;
   margin-bottom: 1rem;
 }
@@ -26,13 +26,20 @@
   gap: 1em;
 }
 
+.header-right .profile-popup-wrapper-btn {
+  border: none;
+  border-radius: 50%;
+  background: none;
+}
+
 .header-right-profile-container {
   width: 50px;
   height: 50px;
-  background: green;
+  border: thin solid var(--Clr-Mid-Gray);
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   position: relative;
+  cursor: pointer;
 }

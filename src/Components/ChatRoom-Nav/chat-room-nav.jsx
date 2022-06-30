@@ -35,6 +35,7 @@ const ChatRoomNav = ({changeChat}) => {
 
   return (
     <aside className="chat-room-nav-container">
+      <h2>Chats</h2>
       <div className="chat-room-nav-container-body">
         <nav>
           <ul>

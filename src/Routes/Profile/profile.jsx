@@ -9,10 +9,20 @@ import "./profile.css"
 
 const Profile = () => {
 
-  const [imgFile, setImgFile] = useState(null)
-  const [newName, setNewName] = useState("")
-
   const {user} = useUserAuth()
+
+  const [imgFile, setImgFile] = useState(null)
+  const [password, setPassword] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+  const [email, setEmail] = useState(user ? user.email : 'none')
+  const [newName, setNewName] = useState(user ? user.displayName : 'none')
+
+  const backgroundImg = {
+    backgroundImage: `url(${user?.photoURL})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center'
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -23,8 +33,6 @@ const Profile = () => {
       await updateProfile(user, {
         photoURL: photoURL
       })
-      console.log('Uploaded!')
-      console.log(imgFile)
     } catch(error) {
       console.log(error.message)
     }
@@ -58,30 +66,51 @@ const Profile = () => {
     <>
     <Header />
     <div className="profile-container">
-      <div className="profile-container-avatar-container">
-        <div className="profile-avatar">
+      <div className="profile-container-left">
+        <h2>Profile Info</h2>
+        <form id='change-details'>
+          <fieldset disabled>
+            <div className="form-input-container">
+              <label htmlFor="">Display Name</label>
+              <input type="text" value={newName}/>
+            </div>
+            <div className="form-input-container">
+              <label htmlFor="">Email</label>
+              <input type="email" value={newName}/>
+            </div>
+            <div className="form-input-container">
+              <label htmlFor="">Password</label>
+              <input type="password" value='helloworld'/>
+            </div>
+            <div className="form-input-container">
+              <label htmlFor="">Confirm Password</label>
+              <input type="password" value={newName}/>
+            </div>
+            <input type="submit" value="Change Details"/>
+          </fieldset>
+        </form>
 
+        <form onSubmit={handleNameChange}>
+          <label htmlFor="New Username"></label>
+          <input type="text" value={newName} onChange={handleName}/>
+          <input type="submit"/>
+        </form>
+        <button onClick={handleClick}>Delete Account</button>
+      </div>
+      <div className="profile-container-right">
+        <div className="profile-avatar-container">
+          <div style={backgroundImg} className="profile-avatar"></div>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="Img-Avatar"></label>
+            <input
+             type="file"
+             onChange={handleChange}
+             accept=".jpg, .png, .gif, .svg"
+            />
+            <input type="submit" value="upload"/>
+          </form>
         </div>
       </div>
-      <div className="profile-info-container">
-
-      </div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="Img-Avatar"></label>
-        <input type="file" onChange={handleChange}/>
-        <input type="submit" value="upload"/>
-      </form>
-      <form onSubmit={handleNameChange}>
-        <label htmlFor="New Username"></label>
-        <input type="text" value={newName} onChange={handleName}/>
-        <input type="submit"/>
-      </form>
-      <h3>{user?.displayName}</h3>
-      <h3>{user?.email}</h3>
-      <img style={{
-        width: '50px'
-      }} src={user?.photoURL} alt=""/>
-      <button onClick={handleClick}>Delete Account</button>
     </div>
     <Footer />
     </>

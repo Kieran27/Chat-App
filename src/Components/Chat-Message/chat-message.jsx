@@ -17,12 +17,10 @@ const ChatMessage = ({message}) => {
 
   const { user } = useUserAuth()
   return (
-    <div style={{
-      display: "flex",
-      width: "200px",
-      justifyContent: "space-between",
-      alignItems: "center",
-    }}>
+    <div className={user.uid === message.userId
+      ? "chat-message chat-message-user"
+      : "chat-message"}
+    >
       <p>{message.message}</p>
       {user.uid === message.userId
         ? <button onClick={() => handleClick(message.id)}>&times;</button>

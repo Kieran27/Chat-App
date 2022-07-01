@@ -40,7 +40,7 @@ const ChatInput = ({currentChat, scrollIntoView}) => {
         id="msg-box"
         cols="50"
         rows="5"
-        placeholder="message"
+        placeholder="Say something nice..."
         onChange={handleChange}
         value={msg}
         autoComplete="off"

@@ -7,14 +7,27 @@
 }
 
 .chat-input input[type=text] {
-  padding: 1rem;
+  padding: 1rem 2rem;
   width: 100%;
   position: relative;
+  border-radius: 30px;
+  border: thin solid var(--Clr-Light-Gray);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)
 }
 
 .chat-input input[type=submit] {
   position: absolute;
+  background: var(--Clr-Primary);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
   margin-right: 2.5rem;
   right: 0;
-  top: 32.5%;
+  top: 22px;
+  transition: 0.2s;
+}
+
+.chat-input input[type=submit]:hover {
+  background: var(--Clr-Tertiary);
 }

@@ -63,3 +63,9 @@
   width: 20%;
   margin-top: 1rem;
 }
+
+@media only screen and (max-width: 800px) {
+  .chat-room-nav-container {
+    display: none;
+  }
+}

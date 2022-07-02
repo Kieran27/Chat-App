@@ -40,6 +40,7 @@ const Login = ({ changeLoginState }) => {
               type="email"
               onChange={handleChange}
               placeholder="email"
+              maxlength='24'
               required
             />
           </div>
@@ -51,6 +52,7 @@ const Login = ({ changeLoginState }) => {
               type="password"
               onChange={handleChange}
               placeholder="password"
+              maxlength='24'
               required
             />
           </div>

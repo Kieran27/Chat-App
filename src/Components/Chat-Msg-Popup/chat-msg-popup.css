@@ -1,0 +1,21 @@
+.chat-msg-popup {
+  position: absolute;
+  top: 0;
+  right: 65%;
+  background: white;
+  color: var(--Clr-Dark-Gray);
+  padding: 1rem;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transform: translateY(-65px);
+}
+
+.chat-msg-popup-item {
+  font-size: 0.9rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.chat-msg-popup-item:hover {
+  text-decoration: underline;
+}

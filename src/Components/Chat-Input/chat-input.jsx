@@ -27,7 +27,9 @@ const ChatInput = ({currentChat, scrollIntoView}) => {
     await addDoc(msgRef, {
       message: msg,
       timestamp: Timestamp.now(),
-      userId: user.uid
+      userId: user.uid,
+      owner: user.displayName,
+      ownerImage: user.photoURL
     })
     scrollIntoView()
   }

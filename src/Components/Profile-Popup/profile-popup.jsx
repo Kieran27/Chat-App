@@ -1,32 +1,31 @@
-import "./profile-popup.css"
-import { useUserAuth } from "../../Auth/authentication-context.js"
-import { useNavigate, Link } from "react-router-dom"
+import "./profile-popup.css";
+import { useUserAuth } from "../../Auth/authentication-context.js";
+import { useNavigate, Link } from "react-router-dom";
 import { DiGithubBadge } from "react-icons/di";
 
 const ProfilePopup = () => {
   const { signUp, user, logOut } = useUserAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const avatarImage = {
     backgroundImage: `url(${user?.photoURL})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  }
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
 
   const handleLogout = async () => {
-    await logOut()
-    navigate('/')
-  }
+    await logOut();
+    navigate("/");
+  };
 
   return (
-    <div className='profile-popup-container'>
+    <div className="profile-popup-container">
       <div className="profile-popup-container-header">
         <div
           className="profile-popup-container-header-avatar-container"
           style={avatarImage}
-         >
-        </div>
+        ></div>
         <h3>{user.displayName}</h3>
       </div>
       <div className="profile-popup-container-body">
@@ -34,16 +33,12 @@ const ProfilePopup = () => {
           <ul>
             <li>
               <div className="profile-popup-nav-item">
-                <Link to="/profile">
-                  Edit Profile
-                </Link>
+                <Link to="/profile">Edit Profile</Link>
               </div>
             </li>
             <li>
               <div className="profile-popup-nav-item">
-                <Link to="/chat">
-                  View Chat
-                </Link>
+                <Link to="/chat">View Chat</Link>
               </div>
             </li>
             <li>
@@ -66,9 +61,8 @@ const ProfilePopup = () => {
           <DiGithubBadge />
         </a>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default ProfilePopup
+export default ProfilePopup;

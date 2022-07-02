@@ -73,7 +73,7 @@ const ChatRoomNav = ({ changeChat }) => {
               required
             />
           </div>
-          <input className="btn-submit" type="submit" />
+          <input className="btn-submit" value="Create" type="submit" />
         </form>
       </div>
     </aside>

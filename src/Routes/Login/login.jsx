@@ -1,31 +1,31 @@
-import { useState } from 'react'
-import { useUserAuth } from "../../Auth/authentication-context.js"
-import { useNavigate, Link } from "react-router-dom"
-import "./login.css"
+import { useState } from "react";
+import { useUserAuth } from "../../Auth/authentication-context.js";
+import { useNavigate, Link } from "react-router-dom";
+import "./login.css";
 
-const Login = ({changeLoginState}) => {
-  const navigate = useNavigate()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+const Login = ({ changeLoginState }) => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { logIn } = useUserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await logIn(email, password)
-      navigate("/chat")
-    } catch(error) {
-      console.log(error.message)
+      await logIn(email, password);
+      navigate("/chat");
+    } catch (error) {
+      console.log(error.message);
     }
-  }
+  };
 
   const handleChange = (e) => {
     const target = e.target;
     target.id === "email"
-     ? setEmail(e.target.value)
-     : setPassword(e.target.value)
-  }
+      ? setEmail(e.target.value)
+      : setPassword(e.target.value);
+  };
 
   return (
     <>
@@ -35,7 +35,7 @@ const Login = ({changeLoginState}) => {
           <div className="form-input-container">
             <label htmlFor="Email">Email</label>
             <input
-              id='email'
+              id="email"
               value={email}
               type="email"
               onChange={handleChange}
@@ -46,7 +46,7 @@ const Login = ({changeLoginState}) => {
           <div className="form-input-container">
             <label htmlFor="Password">Password</label>
             <input
-              id='password'
+              id="password"
               value={password}
               type="password"
               onChange={handleChange}
@@ -54,25 +54,19 @@ const Login = ({changeLoginState}) => {
               required
             />
           </div>
-          <input
-           className="btn-submit"
-           type="submit"
-           value="Login"
-          />
+          <input className="btn-submit" type="submit" value="Login" />
         </form>
       </div>
       <div className="account-switch-container">
-        <p className='no-account-text'>
+        <p className="no-account-text">
           Don't have an account?
           <span>
-            <button onClick={changeLoginState}>
-              Register Here.
-            </button>
+            <button onClick={changeLoginState}>Register Here.</button>
           </span>
         </p>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

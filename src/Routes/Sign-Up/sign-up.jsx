@@ -36,7 +36,7 @@ const SignUp = ({ changeLoginState }) => {
     try {
       await signUp(email, password);
       handleUpdateProfile();
-      navigate('/chat')
+      navigate("/chat");
     } catch (error) {
       console.log(error.message);
     }
@@ -47,7 +47,7 @@ const SignUp = ({ changeLoginState }) => {
       displayName: userName,
       photoURL: ProfileImage,
     });
-    console.log('All Done!')
+    console.log("All Done!");
   };
 
   return (

@@ -20,6 +20,30 @@
   flex-direction: column;
 }
 
+.profile-form-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.profile-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-edit {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  transition: 0.1s;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  color: red;
+}
+
 
 .profile-avatar-container {
   max-width: 350px;
@@ -53,6 +77,8 @@
 
   .profile-container-right {
     align-self: flex-start;
+    width: 100%;
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;

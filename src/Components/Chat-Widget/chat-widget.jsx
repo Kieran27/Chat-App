@@ -1,7 +1,9 @@
-import React from "react";
+import { useContext } from "react";
+import ChatContext from "../../Current/current-chat-context.js"
 import "./chat-widget.css";
 
 const ChatWidget = ({ chat, changeChat }) => {
+  const {changeChatroom} = useContext(ChatContext)
   return (
     <li key={chat.id}>
       <div onClick={changeChat} className="chat-widget">

@@ -2,15 +2,15 @@ import {
    createContext,
    useContext,
    useEffect,
-   useState 
+   useState
  } from 'react'
-import { auth } from "../firebase-config.js"
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged
 } from "firebase/auth"
+import { auth } from "../firebase-config.js"
 
 const userAuthContext = createContext();
 

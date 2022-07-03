@@ -30,7 +30,7 @@ const ChatMessage = ({ message }) => {
       {user.uid === message.userId ? (
         <button className='msg-edit-btn' onClick={() => setShowPopup(showPopup => showPopup = !showPopup)}>
           <HiOutlineDotsVertical />
-          {showPopup && <ChatMsgPopup />}
+          {showPopup && <ChatMsgPopup id={message.userId} />}
         </button>
       ) : (
         ""

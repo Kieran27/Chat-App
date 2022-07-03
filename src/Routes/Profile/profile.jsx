@@ -44,7 +44,9 @@ const Profile = () => {
         );
         break;
       case "edit-email":
-        setEmailFieldset((emailFieldset) => (emailFieldset = !emailFieldset));
+        setEmailFieldset(
+          (emailFieldset) => (emailFieldset = !emailFieldset)
+        );
         break;
       case "edit-password":
         setPasswordFieldset(

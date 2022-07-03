@@ -12,10 +12,9 @@ import { HiSearch } from "react-icons/hi";
 import ChatWidget from "../../Components/Chat-Widget/chat-widget.jsx";
 import ChatContext from "../../Current/current-chat-context.js"
 
-const ChatRoomNav = ({ changeChat }) => {
+const ChatRoomNav = () => {
   const [chatroom, setChatroom] = useState("");
   const [chatroomCollection, setChatRoomCollection] = useState(null);
-  const {currentChat, changeChatroom, handleChat} = useContext(ChatContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +56,7 @@ const ChatRoomNav = ({ changeChat }) => {
           <ul>
             {chatroomCollection?.map((doc) => {
               return (
-                <ChatWidget key={doc.id} chat={doc} changeChat={changeChat} />
+                <ChatWidget key={doc.id} chat={doc} />
               );
             })}
           </ul>

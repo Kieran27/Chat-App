@@ -10,12 +10,8 @@ export function ChatProvider({ children }) {
     setCurrentChat(text)
   }
 
-  const handleChat = (e) => {
-    setCurrentChat(e.target.value)
-  }
-
   return (
-    <ChatContext.Provider value={{currentChat, changeChatroom, handleChat}}>{ children }</ChatContext.Provider>
+    <ChatContext.Provider value={{currentChat, changeChatroom}}>{ children }</ChatContext.Provider>
   )
 }
 

@@ -1,13 +1,15 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import { db } from "../../firebase-config.js"
 import { addDoc, collection, Timestamp } from "firebase/firestore"
 import { useUserAuth } from "../../Auth/authentication-context.js"
+import ChatContext from "../../Current/current-chat-context.js"
 import "./chat-input.css"
 
-const ChatInput = ({currentChat, scrollIntoView}) => {
+const ChatInput = ({scrollIntoView}) => {
   const [msg, setMsg] = useState("");
-  const msgRef = !currentChat ? collection(db, 'messages') : collection(db, currentChat)
   const { user } = useUserAuth()
+  const {currentChat} = useContext(ChatContext)
+  const msgRef = !currentChat ? collection(db, 'messages') : collection(db, currentChat)
 
   const handleChange = (e) => {
     setMsg(e.target.value)

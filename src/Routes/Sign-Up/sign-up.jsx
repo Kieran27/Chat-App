@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { auth } from "../../firebase-config.js"
 import { useUserAuth } from "../../Auth/authentication-context.js";
-import { updateProfile } from "firebase/auth";
+import { updateProfile, getIdTokenResult, reload } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import ProfileImage from "../../Assets/Images/undraw_profile_pic_ic-5-t.svg";
 import "./sign-up.css";
@@ -35,7 +36,7 @@ const SignUp = ({ changeLoginState }) => {
     e.preventDefault();
     try {
       await signUp(email, password);
-      handleUpdateProfile();
+      await handleUpdateProfile()
       navigate("/chat");
     } catch (error) {
       console.log(error.message);
@@ -43,11 +44,11 @@ const SignUp = ({ changeLoginState }) => {
   };
 
   const handleUpdateProfile = async () => {
-    await updateProfile(user, {
+    await updateProfile(auth.currentUser, {
       displayName: userName,
       photoURL: ProfileImage,
     });
-    console.log("All Done!");
+    console.log(user);
   };
 
   return (

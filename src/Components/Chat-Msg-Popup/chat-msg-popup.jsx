@@ -8,7 +8,6 @@ const ChatMsgPopup = ({ id, nimious }) => {
   const {currentChat} = useContext(ChatContext)
 
   const removeMessage = async (e, id) => {
-      const chatRef = currentChat
       try {
         await deleteDoc(doc(db, currentChat, id));
       } catch (error) {

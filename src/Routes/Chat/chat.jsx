@@ -46,11 +46,12 @@ const Chat = () => {
 
   return (
     <div className="chat-room-container">
+      <div className="chat-room-body-header">
+        <h2>Chat Room: {currentChat}</h2>
+      </div>
       <div className="chat-room-container-body">
         {loading && <p>Loading</p>}
-        <div className="chat-room-body-header">
-          <h2>Chat Room: {currentChat}</h2>
-        </div>
+
         {messages?.map((msg) => {
           return <ChatMessage key={msg.id} message={msg} />;
         })}

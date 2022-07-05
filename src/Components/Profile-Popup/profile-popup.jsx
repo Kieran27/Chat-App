@@ -43,12 +43,12 @@ const ProfilePopup = () => {
             </li>
             <li>
               <div className="profile-popup-nav-item">
-                <a href="#">About</a>
+                <a href="https://github.com/Kieran27/Chat-App">About</a>
               </div>
             </li>
             <li>
               <div className="profile-popup-nav-item">
-                <a href="#">View Code</a>
+                <a href="https://github.com/Kieran27/Chat-App">View Code</a>
               </div>
             </li>
           </ul>
@@ -56,7 +56,7 @@ const ProfilePopup = () => {
       </div>
       <div className="profile-popup-container-footer">
         <button onClick={handleLogout}>Logout</button>
-        <a href="#">
+        <a href="https://github.com/Kieran27/Chat-App">
           Chatter
           <DiGithubBadge />
         </a>

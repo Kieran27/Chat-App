@@ -63,10 +63,16 @@
   border: thin solid var(--Clr-Mid-Gray);
 }
 
+.user-display-name {
+  text-align: center;
+  margin: 0.5rem;
+}
+
 @media only screen and (max-width: 1000px) {
   .profile-container {
     flex-direction: column;
     align-items: flex-start;
+    flex-flow: column-reverse;
   }
 
   .profile-container-left {

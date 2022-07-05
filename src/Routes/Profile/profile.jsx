@@ -22,6 +22,8 @@ const Profile = () => {
   const [emailFieldset, setEmailFieldset] = useState(true);
   const [passwordFieldset, setPasswordFieldset] = useState(true);
 
+  const [imgUploading, setImgUploading] = useState(false)
+
   const backgroundImg = {
     backgroundImage: `url(${photoURL})`,
     backgroundSize: "cover",
@@ -72,9 +74,6 @@ const Profile = () => {
       case "edit-password":
         // Code
         break;
-      case "edit-photoURL":
-        updateProfilePhoto();
-        break;
       default:
         return false;
     }
@@ -104,6 +103,11 @@ const Profile = () => {
     }
   };
 
+  const handlePhotoChange = (e) => {
+    e.preventDefault();
+    updateProfilePhoto();
+  }
+
   const handleClick = async () => {
     try {
       await user.delete();
@@ -114,7 +118,8 @@ const Profile = () => {
   };
 
   const updateProfilePhoto = async () => {
-    const imgRef = ref(storage, `${auth.currentUser.uid}.jpg`);
+    const imgRef = ref(storage, `${auth.currentUser.uid}${Math.random()}.jpg`);
+    setImgUploading(true)
     try {
       const snapshot = await uploadBytes(imgRef, imgFile);
       const photoURL = await getDownloadURL(imgRef);
@@ -122,6 +127,8 @@ const Profile = () => {
         photoURL: photoURL,
       });
       console.log("success!");
+      setImgUploading(false)
+      window.location.reload()
     } catch (error) {
       console.log(error.message);
     }
@@ -147,7 +154,6 @@ const Profile = () => {
       <div className="profile-container">
         <div className="profile-container-left">
           <h2>Profile Info</h2>
-
           <div className="profile-form-container" id="edit-username">
             <button className="btn-edit" onClick={enableForm}>
               <HiPencil />
@@ -161,7 +167,7 @@ const Profile = () => {
                     type="text"
                     value={username}
                     onChange={handleChange}
-                    maxlength='20'
+                    maxLength='20'
                     required
                   />
                 </div>
@@ -183,7 +189,7 @@ const Profile = () => {
                     type="email"
                     value={email}
                     onChange={handleChange}
-                    maxlength='24'
+                    maxLength='24'
                     required
                   />
                 </div>
@@ -205,7 +211,7 @@ const Profile = () => {
                     type="password"
                     value={password}
                     onChange={handleChange}
-                    maxlength='24'
+                    maxLength='24'
                     required
                   />
                 </div>
@@ -216,7 +222,7 @@ const Profile = () => {
                     type="password"
                     value={newPassword}
                     onChange={handleChange}
-                    maxlength='24'
+                    maxLength='24'
                     required
                   />
                 </div>
@@ -230,8 +236,8 @@ const Profile = () => {
         <div className="profile-container-right">
           <div className="profile-avatar-container">
             <div style={backgroundImg} className="profile-avatar"></div>
-
-            <form id="edit-photoURL" onSubmit={handleSubmit}>
+            <h3 className="user-display-name">{user?.displayName}</h3>
+            <form id="edit-photoURL" onSubmit={handlePhotoChange}>
                 <label htmlFor="Img-Avatar"></label>
                 <input
                   id="photo-file"
@@ -240,7 +246,12 @@ const Profile = () => {
                   accept=".jpg, .png, .gif, .svg"
                   required
                 />
-              <input type="submit" value="upload" />
+              <input
+                type="submit"
+                value={imgUploading
+                ? "uploading..."
+                : "upload"}
+              />
             </form>
           </div>
         </div>

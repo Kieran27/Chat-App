@@ -41,15 +41,7 @@ const ChatMessage = ({ message }) => {
             : "chat-msg-container"
         }
       >
-        <div
-          className="msg-img-container"
-          style={{
-            backgroundImage: `url(${message.ownerImage})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
+        <div className="msg-img-container" style={avatarImg}></div>
         <div
           className={
             user.uid === message.userId
@@ -66,7 +58,11 @@ const ChatMessage = ({ message }) => {
             ""
           )}
           <p>{message.message}</p>
-          <span className="msg-sent-from">{`Sent from ${message.owner}`}</span>
+          <span className={
+            user.uid === message.userId
+              ? "msg-sent-from-user"
+              : "msg-sent-from"
+          }>{`Sent from ${message.owner}`}</span>
         </div>
       </div>
     </>

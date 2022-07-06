@@ -1,0 +1,20 @@
+.chat-room-nav-mobile-container {
+  display: sticky;
+  top: 0;
+  width: 100%;
+  height: calc(100vh - 83px);
+  left: -100%;
+  padding: 0rem 1.5rem;
+  transition: 0.2s;
+  overflow-y: scroll; 
+}
+
+.toggle-width {
+  left: 0;
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import ChatInput from "../../Components/Chat-Input/chat-input.jsx";
 import ChatMessage from "../../Components/Chat-Message/chat-message.jsx";
-import ChatRoomNav from "../../Components/ChatRoom-Nav/chat-room-nav.jsx";
 import ChatContext from "../../Current/current-chat-context.js"
 import { db } from "../../firebase-config.js";
 import "./chat.css";
@@ -14,7 +13,7 @@ import {
   query,
 } from "firebase/firestore";
 
-const Chat = () => {
+const Chat = ({showNav}) => {
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(true);
   const dummyRef = useRef(null);
@@ -44,14 +43,18 @@ const Chat = () => {
     dummyRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    scrollIntoView();
+  },[messages])
+
   return (
     <div className="chat-room-container">
       <div className="chat-room-body-header">
         <h2>Chat Room: {currentChat}</h2>
+        <button onClick={showNav}>X</button>
       </div>
       <div className="chat-room-container-body">
         {loading && <p>Loading</p>}
-
         {messages?.map((msg) => {
           return <ChatMessage key={msg.id} message={msg} />;
         })}

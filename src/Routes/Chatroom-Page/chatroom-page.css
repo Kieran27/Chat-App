@@ -1,7 +1,8 @@
 .chat-page-container {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  height: calc(100vh - 85px)
+  height: calc(100vh - 85px);
+  position: relative;
 }
 
 @media only screen and (max-width: 800px) {

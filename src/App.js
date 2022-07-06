@@ -4,10 +4,8 @@ import HomePage from "./Routes/Homepage/homepage.jsx"
 import Profile from "./Routes/Profile/profile.jsx"
 import SignUp from "./Routes/Sign-Up/sign-up.jsx"
 import Login from "./Routes/Login/login.jsx"
-import Chat from "./Routes/Chat/chat.jsx"
 import ChatRoomPage from "./Routes/Chatroom-Page/chatroom-page.jsx"
-import Header from "./Components/Header/header.jsx"
-import Footer from "./Components/Footer/footer.jsx"
+import ChatNavMobile from "./Routes/Chat-Nav-Mobile/chat-nav-mobile.jsx"
 
 const App = () => {
   return (
@@ -20,6 +18,7 @@ const App = () => {
               <Route path="/register" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
               <Route path="/chat" element={<ChatRoomPage />} />
+              <Route path="/chat-nav" element={<ChatNavMobile />} />
             </Routes>
         </main>
       </UserAuthContextProvider>

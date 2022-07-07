@@ -8,7 +8,7 @@ import ChatRoomPage from "./Routes/Chatroom-Page/chatroom-page.jsx"
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <UserAuthContextProvider>
         <main>
             <Routes>
@@ -20,7 +20,7 @@ const App = () => {
             </Routes>
         </main>
       </UserAuthContextProvider>
-  </BrowserRouter>
+  </HashRouter>
   )
 }
 

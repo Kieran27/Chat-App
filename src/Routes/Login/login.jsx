@@ -8,28 +8,50 @@ const Login = ({ changeLoginState }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [errorState, setErrorState] = useState(false)
 
   const { logIn } = useUserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorState(false);
     setLoggingIn(true);
     try {
       await logIn(email, password);
       setLoggingIn(false);
       navigate("/chat");
     } catch (error) {
-      console.log(error.message);
+      const code = error.code
+      console.log(error.code)
+      handleErrors(code);
       setLoggingIn(false);
     }
   };
 
   const handleChange = (e) => {
     const target = e.target;
+    setErrorState(false)
     target.id === "email"
       ? setEmail(e.target.value)
       : setPassword(e.target.value);
   };
+
+  const handleErrors = (errorCode) => {
+    switch (errorCode) {
+      case "auth/user-not-found":
+        setErrorState(true)
+        setErrorMessage("Error: User not Found")
+        break;
+      case "auth/wrong-password":
+        setErrorState(true)
+        setErrorMessage("Error: Wrong Password")
+        break;
+      default:
+        setErrorState(true)
+        setErrorMessage("Oops. Something went wrong. Please Try Again")
+    }
+  }
 
   return (
     <>
@@ -71,6 +93,7 @@ const Login = ({ changeLoginState }) => {
             : "Login"}
           />
         </form>
+        {errorState && <span className='error-msg'>{errorMessage}</span>}
       </div>
       <div className="account-switch-container">
         <p className="no-account-text">

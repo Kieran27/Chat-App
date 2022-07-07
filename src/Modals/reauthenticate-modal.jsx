@@ -1,14 +1,19 @@
 import React from 'react'
-import Login from "../Routes/Login/login.jsx"
+import Reauthenticate from "../Components/Reauthenticate/reauthenticate.jsx"
 
-const ReauthenticateModal = () => {
+const ReauthenticateModal = ({displayReauthenticateModal}) => {
+
   return (
     <div className="modal-container">
-      <div className="modal">
-        Whoops, it looks like you've tried to change sensitive information. This is a security risk.
-         Please reauthenticate your account by logging in again. If successful, please try your
+      <div className="modal" style={{textAlign: "center"}}>
+         This is security-sensitive operation.
+         <br/>
+         Please reauthenticate your account by signing in
+         again to complete this action.
+         <br/>
+         If successful, please try your
          previous action again for it to work. Thankyou!
-        <Login />
+        <Reauthenticate />
       </div>
     </div>
   )

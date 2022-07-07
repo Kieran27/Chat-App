@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { auth, storage } from "../../firebase-config.js";
-import { updateProfile, deleteUser } from "firebase/auth";
+import { updateProfile, deleteUser, updateEmail, updatePassword } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useUserAuth } from "../../Auth/authentication-context.js";
 import Header from "../../Components/Header/header.jsx";
@@ -31,6 +31,8 @@ const Profile = () => {
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showReauthenticateModal, setShowReauthenticateModal] = useState(false);
+  const[errorState, setErrorState] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const backgroundImg = {
     backgroundImage: `url(${photoURL})`,
@@ -69,21 +71,25 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = e.target.parentElement.id;
-    console.log(e.target);
+    console.log(id)
     switch (id) {
       case "edit-username":
         handleNameChange();
         break;
       case "edit-email":
-        // code
+        handleEmailChange()
         break;
       case "edit-password":
-        // Code
+        handlePasswordChange()
         break;
       default:
         return false;
     }
   };
+
+  useEffect(() => {
+    console.log(username, email, password)
+  }, [username, email, password])
 
   const handleChange = (e) => {
     const id = e.target.id;
@@ -114,16 +120,29 @@ const Profile = () => {
     updateProfilePhoto();
   };
 
-  const handleErrors = (error) => {};
+  const handleErrors = (errorCode) => {
+    switch (errorCode) {
+      case "auth/requires-recent-login":
+        displayReauthenticateModal();
+        break;
+      case "auth-":
+        // code
+        break;
+      case "auth-":
+        // code
+        break;
+      default:
+        // Code
+    }
+  };
 
   const deleteAccount = async () => {
-    console.log("hello");
     try {
       await deleteUser(user);
     } catch (error) {
+      handleErrors(error.code)
       alert(error.message);
       setShowDeleteModal(false);
-      setShowReauthenticateModal(true);
     }
   };
 
@@ -158,25 +177,24 @@ const Profile = () => {
 
   const handleEmailChange = async () => {
     try {
-      await updateProfile(user, {
-        displayName: username,
-      });
+      await updateProfile(user, email)
       setFieldChanging(false);
       window.location.reload()
     } catch (error) {
-      console.log(error.message);
+      const code = error.code
+      handleErrors(code);
     }
   };
 
-  const handlePasswordChange = async () => {
+  const handlePasswordChange = async (e) => {
+    if (password !== newPassword) alert("ERROR")
     try {
-      await updateProfile(user, {
-        displayName: username,
-      });
+      await updatePassword(user, password)
       setFieldChanging(false);
       window.location.reload()
     } catch (error) {
       console.log(error.message);
+      handleErrors(error.code)
     }
   };
 
@@ -203,7 +221,10 @@ const Profile = () => {
             deleteAccount={deleteAccount}
           />
         )}
-        {showReauthenticateModal && <ReauthenticateModal />}
+        {showReauthenticateModal &&
+          <ReauthenticateModal
+            displayReauthenticateModal = {displayReauthenticateModal}
+          />}
         <div className="profile-container-left">
           <h2>Profile Info</h2>
           <div className="profile-form-container" id="edit-username">
@@ -238,7 +259,7 @@ const Profile = () => {
             <button className="btn-edit" onClick={enableForm}>
               <HiPencil />
             </button>
-            <form id="change-email">
+            <form id="change-email" onSubmit={handleSubmit}>
               <fieldset disabled={emailFieldset}>
                 <div className="form-input-container">
                   <label htmlFor="">Email</label>
@@ -266,7 +287,7 @@ const Profile = () => {
             <button className="btn-edit" onClick={enableForm}>
               <HiPencil />
             </button>
-            <form id="change-password">
+            <form id="change-password" onSubmit={handleSubmit}>
               <fieldset disabled={passwordFieldset}>
                 <div className="form-input-container">
                   <label htmlFor="">New Password</label>
@@ -312,7 +333,7 @@ const Profile = () => {
                 <input
                   id="photo-file"
                   name="Img-Avatar"
-                  class="file"
+                  className="file"
                   type="file"
                   onChange={handleChange}
                   accept=".jpg, .png, .gif, .svg"

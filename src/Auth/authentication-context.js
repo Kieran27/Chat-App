@@ -8,7 +8,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  reauthenticateWithCredential
 } from "firebase/auth"
 import { auth } from "../firebase-config.js"
 
@@ -30,6 +31,13 @@ export function UserAuthContextProvider({ children }) {
     return signOut(auth)
   }
 
+  function reAuthenticate(email, password) {
+    return reauthenticateWithCredential(
+        user.email,
+        password
+    )
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user)
@@ -38,7 +46,7 @@ export function UserAuthContextProvider({ children }) {
   }, [])
 
 
-  return <userAuthContext.Provider value={{user, signUp, logIn, logOut}}> {children} </userAuthContext.Provider>
+  return <userAuthContext.Provider value={{user, signUp, logIn, logOut, reAuthenticate}}> {children} </userAuthContext.Provider>
 }
 
 export function useUserAuth() {

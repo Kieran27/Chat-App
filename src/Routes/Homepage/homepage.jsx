@@ -43,9 +43,9 @@ const HomePage = () => {
           ) : (
             <SignUp changeLoginState={changeLoginState} />
           )}
-          <div className="homepage-right-footer">
+          {/*<div className="homepage-right-footer">
             <img src={HeroImage} alt="" />
-          </div>
+          </div>*/}
         </div>
       </div>
     </>

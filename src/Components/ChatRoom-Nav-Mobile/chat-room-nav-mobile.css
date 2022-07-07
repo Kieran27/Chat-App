@@ -6,7 +6,7 @@
   left: -100%;
   padding: 0rem 1.5rem;
   transition: 0.2s;
-  overflow-y: scroll; 
+  overflow-y: scroll;
 }
 
 .toggle-width {
@@ -17,4 +17,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.mobile-nav-header button {
+  color: white;
+  background: #333333;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.mobile-nav-header button:hover {
+  outline: thin solid #333333;
+  background: none;
+  color: #333333;
+}
+
+@media only screen and (max-width: 400px) {
+
+  .chat-room-nav-mobile-container {
+    padding: 0rem 1rem;
+  }
 }

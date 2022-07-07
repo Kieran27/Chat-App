@@ -60,6 +60,10 @@ input {
   font-family: var(--Font-Primary);
 }
 
+input[type="file"] {
+  font-family: var(--Font-Primary);
+}
+
 fieldset {
   border: none;
   padding: 0;

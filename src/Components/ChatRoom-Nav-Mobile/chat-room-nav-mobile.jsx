@@ -83,8 +83,9 @@ const ChatNavMobile = ({ showNav, mobileNav }) => {
             <input
               value={chatroom}
               type="text"
+              maxLength="24"
               onChange={handleChange}
-              placeholder="chat name"
+              placeholder="Chat name"
               required
             />
           </div>

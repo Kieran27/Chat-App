@@ -51,7 +51,7 @@ const Chat = ({showNav}) => {
     <div className="chat-room-container">
       <div className="chat-room-body-header">
         <h2>Chat Room: {currentChat}</h2>
-        <button onClick={showNav}>X</button>
+        <button onClick={showNav}>Chats</button>
       </div>
       <div className="chat-room-container-body">
         {loading && <p>Loading</p>}

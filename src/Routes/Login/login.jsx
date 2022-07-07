@@ -7,16 +7,20 @@ const Login = ({ changeLoginState }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
 
   const { logIn } = useUserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoggingIn(true);
     try {
       await logIn(email, password);
+      setLoggingIn(false);
       navigate("/chat");
     } catch (error) {
       console.log(error.message);
+      setLoggingIn(false);
     }
   };
 
@@ -40,7 +44,7 @@ const Login = ({ changeLoginState }) => {
               type="email"
               onChange={handleChange}
               placeholder="email"
-              maxlength='24'
+              maxLength='24'
               required
             />
           </div>
@@ -52,11 +56,20 @@ const Login = ({ changeLoginState }) => {
               type="password"
               onChange={handleChange}
               placeholder="password"
-              maxlength='24'
+              maxLength='24'
               required
             />
           </div>
-          <input className="btn-submit" type="submit" value="Login" />
+          <input
+           className={loggingIn
+            ? "btn-submit logging-in"
+            : "btn-submit"
+           }
+           type="submit"
+           value={loggingIn
+            ? "Logging in..."
+            : "Login"}
+          />
         </form>
       </div>
       <div className="account-switch-container">

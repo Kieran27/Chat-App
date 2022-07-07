@@ -51,6 +51,10 @@
   background: var(--Clr-Tertiary);
 }
 
+.logging-in {
+  background: var(--Clr-Tertiary);
+}
+
 .account-switch-container {
   display: flex;
   justify-content: center;

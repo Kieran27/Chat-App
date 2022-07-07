@@ -24,6 +24,23 @@
   z-index: 1;
 }
 
+.chat-room-body-header button {
+  display: none;
+  background: var(--Clr-Primary);
+  border: none;
+  align-items: center;
+  font-size: 0.9rem;
+  color: white;
+  border-radius: 20px;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chat-room-body-header button:hover {
+  background: var(--Clr-Tertiary);
+}
+
 .chat-room-body-header h2 {
   margin-top: 0;
   margin-bottom: 0;
@@ -44,4 +61,24 @@
   position: sticky;
   bottom: 0;
   width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+  .chat-room-body-header button {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .chat-room-body-header  {
+    align-items: center;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+  }
+
+  .chat-room-body-header h2 {
+    font-size: 1.3rem;
+  }
 }

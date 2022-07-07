@@ -11,6 +11,7 @@ const SignUp = ({ changeLoginState }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [registering, setRegistering] = useState(false);
 
   const { signUp, user } = useUserAuth();
 
@@ -34,12 +35,15 @@ const SignUp = ({ changeLoginState }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setRegistering(true);
     try {
       await signUp(email, password);
       await handleUpdateProfile()
+      setRegistering(false);
       navigate("/chat");
     } catch (error) {
       console.log(error.message);
+      setRegistering(false);
     }
   };
 
@@ -64,7 +68,7 @@ const SignUp = ({ changeLoginState }) => {
               type="text"
               onChange={handleChange}
               placeholder="username"
-              maxlength='20'
+              maxLength='20'
               required
             />
           </div>
@@ -76,7 +80,7 @@ const SignUp = ({ changeLoginState }) => {
               type="email"
               onChange={handleChange}
               placeholder="email"
-              maxlength='24'
+              maxLength='24'
               required
             />
           </div>
@@ -88,11 +92,20 @@ const SignUp = ({ changeLoginState }) => {
               type="password"
               onChange={handleChange}
               placeholder="password"
-              maxlength='24'
+              maxLength='24'
               required
             />
           </div>
-          <input className="btn-submit" type="submit" value="Sign Up!" />
+          <input
+            className={registering
+             ? "btn-submit logging-in"
+             : "btn-submit"
+            }
+            type="submit"
+            value={registering
+              ? "Signing Up..."
+              : "Sign Up!"}
+          />
         </form>
       </div>
       <div className="account-switch-container">

@@ -32,3 +32,12 @@
 .chat-input input[type=submit]:hover {
   background: var(--Clr-Tertiary);
 }
+
+@media only screen and (max-width: 400px) {
+
+  .chat-input  {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+}

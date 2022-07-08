@@ -7,7 +7,6 @@ const RequireAuth = ({children}) => {
   const { user } = useUserAuth();
   const [users, loading, error] = useAuthState(auth)
 
-
   if (!loading && !user) {
     return (
       <Navigate to="/" replace />

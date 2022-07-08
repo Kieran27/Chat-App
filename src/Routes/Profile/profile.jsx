@@ -7,6 +7,7 @@ import Header from "../../Components/Header/header.jsx";
 import Footer from "../../Components/Footer/footer.jsx";
 import DeleteAccountModal from "../../Modals/delete-account-modal.jsx";
 import ReauthenticateModal from "../../Modals/reauthenticate-modal.jsx";
+import ErrorPopup from "../../Components/Error-Popup/error-popup.jsx"
 import { HiPencil } from "react-icons/hi";
 import "./profile.css";
 
@@ -31,8 +32,8 @@ const Profile = () => {
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showReauthenticateModal, setShowReauthenticateModal] = useState(false);
-  const [errorState, setErrorState] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
+  const [errorPopup, setErrorPopup] = useState(false);
 
   const backgroundImg = {
     backgroundImage: `url(${photoURL})`,
@@ -46,6 +47,14 @@ const Profile = () => {
     setEmail(user?.email);
     setPhotoURL(user?.photoURL);
   }, [user]);
+
+  useEffect(() => {
+    if (errorPopup) {
+      setTimeout(() => {
+        setErrorPopup(false)
+      }, 1000)
+    }
+  }, [errorPopup])
 
   const enableForm = (e) => {
     const parent = e.currentTarget.parentElement;
@@ -87,10 +96,6 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(username, email, password)
-  }, [username, email, password])
-
   const handleChange = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -124,15 +129,13 @@ const Profile = () => {
     switch (errorCode) {
       case "auth/requires-recent-login":
         displayReauthenticateModal();
-        break;
-      case "auth-":
-        // code
-        break;
-      case "auth-":
-        // code
+        setErrorPopup(true);
+        setErrorMessage(errorCode)
         break;
       default:
-        // Code
+        displayReauthenticateModal();
+        setErrorPopup(true);
+        setErrorMessage("Oops Something Went Wrong")
     }
   };
 
@@ -158,7 +161,8 @@ const Profile = () => {
       setImgUploading(false);
       window.location.reload();
     } catch (error) {
-      console.log(error.message);
+      const code = error.code
+      handleErrors(code)
     }
   };
 
@@ -169,18 +173,19 @@ const Profile = () => {
         displayName: username,
       });
       setFieldChanging(false);
-      alert("Success!")
       window.location.reload()
+      alert("Displayname Changed Successfully!")
     } catch (error) {
-      console.log(error.message);
+      const code = error.code
+      handleErrors(code)
     }
   };
 
   const handleEmailChange = async () => {
     try {
-      await updateProfile(user, email)
-      setFieldChanging(false);
-      alert("Success!")
+      await updateEmail(user, email)
+      setEmailChanging(false);
+      alert("Email Changed Successfully!")
       window.location.reload()
     } catch (error) {
       const code = error.code
@@ -189,15 +194,19 @@ const Profile = () => {
   };
 
   const handlePasswordChange = async (e) => {
-    if (password !== newPassword) alert("Passwords Must Match")
-    try {
-      await updatePassword(user, password)
-      setPasswordChanging(false);
-      alert("Success!")
-      window.location.reload()
-    } catch (error) {
-      console.log(error.message);
-      handleErrors(error.code)
+    if (password !== newPassword) {
+      setErrorMessage("Passwords Must Match!")
+      setErrorPopup(true);
+    } else {
+      try {
+        await updatePassword(user, password)
+        setPasswordChanging(false);
+        alert("Password Changed Successfully!")
+        window.location.reload()
+      } catch (error) {
+        const code = error.code
+        handleErrors(code)
+      }
     }
   };
 
@@ -228,6 +237,7 @@ const Profile = () => {
           <ReauthenticateModal
             displayReauthenticateModal = {displayReauthenticateModal}
           />}
+        {errorPopup && <ErrorPopup message={errorMessage} />}
         <div className="profile-container-left">
           <h2>Profile Info</h2>
           <div className="profile-form-container" id="edit-username">

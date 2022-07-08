@@ -1,0 +1,23 @@
+.error-popup {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 4rem;
+  padding: 1rem 3rem;
+  background: red;
+  border-radius: 10px;
+  color: white;
+  animation: pop-in 350ms;
+}
+
+@keyframes pop-in {
+  from {
+    top: 0%;
+  }
+
+  to {
+    top: 5%;
+  }
+
+}

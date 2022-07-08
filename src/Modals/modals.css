@@ -10,7 +10,8 @@
 }
 
 .modal {
-  min-width: 550px;
+  max-width: 550px;
+  width: 100%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -27,9 +28,85 @@
   animation: fade-in 350ms;
 }
 
+.modal-header {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-authenticate .modal-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.modal-header button {
+  color: white;
+  background: #333333;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.modal-header button:hover {
+  outline: thin solid #333333;
+  background: none;
+  color: #333333;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-body p {
+  margin: 0;
+}
 
 .modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 1em;
+}
+
+.btn-cancel {
+  background: none;
+  border: none;
+  color: var(--Clr-Primary);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-cancel:hover {
+  color:var(--Clr-Tertiary);
+}
+
+.btn-accept {
+  border: none;
+  color: white;
+  background: var(--Clr-Primary);
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  transition: 0.2s;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-accept:hover {
+  background: var(--Clr-Tertiary);
+}
+
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    width: 90vw;
+  }
 }

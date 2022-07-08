@@ -9,7 +9,7 @@ import RequireAuth from "./Routes/RequireAuth/require-auth.jsx"
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <UserAuthContextProvider>
         <main>
             <Routes>
@@ -35,7 +35,7 @@ const App = () => {
             </Routes>
         </main>
       </UserAuthContextProvider>
-  </BrowserRouter>
+  </HashRouter>
   )
 }
 

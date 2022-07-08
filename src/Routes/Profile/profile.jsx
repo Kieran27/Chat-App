@@ -31,7 +31,7 @@ const Profile = () => {
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showReauthenticateModal, setShowReauthenticateModal] = useState(false);
-  const[errorState, setErrorState] = useState(false);
+  const [errorState, setErrorState] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
   const backgroundImg = {
@@ -169,6 +169,7 @@ const Profile = () => {
         displayName: username,
       });
       setFieldChanging(false);
+      alert("Success!")
       window.location.reload()
     } catch (error) {
       console.log(error.message);
@@ -179,6 +180,7 @@ const Profile = () => {
     try {
       await updateProfile(user, email)
       setFieldChanging(false);
+      alert("Success!")
       window.location.reload()
     } catch (error) {
       const code = error.code
@@ -187,10 +189,11 @@ const Profile = () => {
   };
 
   const handlePasswordChange = async (e) => {
-    if (password !== newPassword) alert("ERROR")
+    if (password !== newPassword) alert("Passwords Must Match")
     try {
       await updatePassword(user, password)
-      setFieldChanging(false);
+      setPasswordChanging(false);
+      alert("Success!")
       window.location.reload()
     } catch (error) {
       console.log(error.message);

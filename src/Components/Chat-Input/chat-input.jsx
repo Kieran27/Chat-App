@@ -25,7 +25,7 @@ const ChatInput = ({ scrollIntoView }) => {
     e.preventDefault();
     addMsg();
     clearInput();
-    if (setDisplayEmojiPicker) setEmojiPicker();
+    if (displayEmojiPicker) setEmojiPicker();
   };
 
   const clearInput = () => {
@@ -77,7 +77,7 @@ const ChatInput = ({ scrollIntoView }) => {
         />
         <input type="submit" value="send" />
       </form>
-      <button className="btn-emoji" onClick={setEmojiPicker}>
+      <button className="btn-emoji" onClick={setEmojiPicker} disableAutoFocus={true}>
         <HiEmojiHappy />
       </button>
       {displayEmojiPicker && (

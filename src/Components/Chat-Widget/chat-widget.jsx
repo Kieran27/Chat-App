@@ -3,7 +3,7 @@ import ChatContext from "../../Current/current-chat-context.js"
 import "./chat-widget.css";
 
 const ChatWidget = ({ chat, mobileNav, showNav }) => {
-  const {changeChatroom} = useContext(ChatContext)
+  const {currentChat, changeChatroom} = useContext(ChatContext)
 
   const switchChatroom = (e) => {
     if (mobileNav) {
@@ -14,7 +14,12 @@ const ChatWidget = ({ chat, mobileNav, showNav }) => {
 
   return (
     <li key={chat.id}>
-      <div onClick={switchChatroom} className="chat-widget">
+      <div onClick={switchChatroom} className={
+        currentChat === chat.name.toLowerCase()
+            ? "chat-widget active-chat"
+            : "chat-widget"
+        }
+      >
         <div className="chat-widget-thumbnail-container"></div>
         <div className="chat-widget-info-container">
           <h5>{chat.name}</h5>

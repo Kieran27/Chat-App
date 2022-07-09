@@ -7,6 +7,10 @@
   transition: 0.2s;
 }
 
+.active-chat {
+  background: var(--Clr-Very-Light-Gray);
+}
+
 .chat-widget:hover {
   background: var(--Clr-Very-Light-Gray);
   border-radius: 10px;

@@ -79,6 +79,30 @@
   margin: 0.5rem;
 }
 
+.file-input-btn {
+  color: white;
+  background: var(--Clr-Primary);
+  font-weight: bold;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.file-input-btn svg {
+  font-size: 1.75rem;
+  margin-right: 0.5rem;
+}
+
+.file-input-btn:hover {
+  background: var(--Clr-Tertiary);
+}
+
 
 @media only screen and (max-width: 1000px) {
   .profile-container {

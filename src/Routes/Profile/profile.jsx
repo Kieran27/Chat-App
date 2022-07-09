@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { auth, storage } from "../../firebase-config.js";
 import { updateProfile, deleteUser, updateEmail, updatePassword } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -9,6 +9,7 @@ import DeleteAccountModal from "../../Modals/delete-account-modal.jsx";
 import ReauthenticateModal from "../../Modals/reauthenticate-modal.jsx";
 import ErrorPopup from "../../Components/Error-Popup/error-popup.jsx"
 import { HiPencil } from "react-icons/hi";
+import { BiImageAdd } from "react-icons/bi";
 import "./profile.css";
 
 const Profile = () => {
@@ -34,6 +35,7 @@ const Profile = () => {
   const [showReauthenticateModal, setShowReauthenticateModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const [errorPopup, setErrorPopup] = useState(false);
+  const hiddenRef = useRef(null)
 
   const backgroundImg = {
     backgroundImage: `url(${photoURL})`,
@@ -55,6 +57,12 @@ const Profile = () => {
       }, 1000)
     }
   }, [errorPopup])
+
+  useEffect(() => {
+    if (imgFile) {
+      updateProfilePhoto()
+    }
+  },[imgFile])
 
   const enableForm = (e) => {
     const parent = e.currentTarget.parentElement;
@@ -118,11 +126,6 @@ const Profile = () => {
       default:
         return false;
     }
-  };
-
-  const handlePhotoChange = (e) => {
-    e.preventDefault();
-    updateProfilePhoto();
   };
 
   const handleErrors = (errorCode) => {
@@ -209,6 +212,10 @@ const Profile = () => {
       }
     }
   };
+
+  const simulatePhotoChange = async (e) => {
+    await hiddenRef.current.click();
+  }
 
   const displayDeleteModal = () => {
     setShowDeleteModal(
@@ -341,13 +348,30 @@ const Profile = () => {
           <div className="profile-avatar-container">
             <div style={backgroundImg} className="profile-avatar"></div>
             <h3 className="user-display-name">{user?.displayName}</h3>
-            <form id="edit-photoURL" onSubmit={handlePhotoChange}>
+            <button className="file-input-btn" onClick={simulatePhotoChange}>
+              <BiImageAdd />
+              { imgUploading ? "Changing..." : "Change"}
+            </button>
+            <input
+              style={{display: "none"}}
+              id="photo-file"
+              name="Img-Avatar"
+              className="file"
+              type="file"
+              ref={hiddenRef}
+              onChange={handleChange}
+              accept=".jpg, .png, .gif, .svg"
+              required
+            />
+            {/*<form id="edit-photoURL" onSubmit={handlePhotoChange}>
                 <label htmlFor="Img-Avatar"></label>
                 <input
+                  style={{display: "none"}}
                   id="photo-file"
                   name="Img-Avatar"
                   className="file"
                   type="file"
+                  ref={hiddenRef}
                   onChange={handleChange}
                   accept=".jpg, .png, .gif, .svg"
                   required
@@ -356,7 +380,7 @@ const Profile = () => {
                 type="submit"
                 value={imgUploading ? "uploading..." : "upload"}
               />
-            </form>
+            </form>*/}
           </div>
         </div>
       </div>

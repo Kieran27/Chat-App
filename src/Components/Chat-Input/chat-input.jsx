@@ -77,12 +77,12 @@ const ChatInput = ({ scrollIntoView }) => {
         />
         <input type="submit" value="send" />
       </form>
-      <button className="btn-emoji" onClick={setEmojiPicker} disableAutoFocus={true}>
+      <button className="btn-emoji" onClick={setEmojiPicker}>
         <HiEmojiHappy />
       </button>
       {displayEmojiPicker && (
         <div className="emoji-picker-container">
-          <Picker onEmojiClick={onEmojiClick} />
+          <Picker onEmojiClick={onEmojiClick} disableAutoFocus={true} />
         </div>
       )}
     </>

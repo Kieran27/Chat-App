@@ -1,18 +1,15 @@
 import { useState } from "react";
 import { useUserAuth } from "../../Auth/authentication-context.js";
 import { useNavigate, Link } from "react-router-dom";
-import {
-    EmailAuthProvider,
-    reauthenticateWithCredential,
-} from 'firebase/auth'
+import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
 
 const Reauthenticate = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [errorState, setErrorState] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorState, setErrorState] = useState(false);
 
   const { user } = useUserAuth();
 
@@ -20,16 +17,13 @@ const Reauthenticate = () => {
     e.preventDefault();
     setErrorState(false);
     setLoggingIn(true);
-    const credential = EmailAuthProvider.credential(
-      user.email,
-      password
-    )
+    const credential = EmailAuthProvider.credential(user.email, password);
     try {
-      await reauthenticateWithCredential(user, credential)
+      await reauthenticateWithCredential(user, credential);
       setLoggingIn(false);
-      alert("Account Successfully Authenticated!")
+      alert("Account Successfully Authenticated!");
     } catch (error) {
-      const code = error.code
+      const code = error.code;
       handleErrors(code);
       setLoggingIn(false);
     }
@@ -37,7 +31,7 @@ const Reauthenticate = () => {
 
   const handleChange = (e) => {
     const target = e.target;
-    setErrorState(false)
+    setErrorState(false);
     target.id === "email"
       ? setEmail(e.target.value)
       : setPassword(e.target.value);
@@ -46,18 +40,18 @@ const Reauthenticate = () => {
   const handleErrors = (errorCode) => {
     switch (errorCode) {
       case "auth/user-not-found":
-        setErrorState(true)
-        setErrorMessage("Error: User not Found")
+        setErrorState(true);
+        setErrorMessage("Error: User not Found");
         break;
       case "auth/wrong-password":
-        setErrorState(true)
-        setErrorMessage("Error: Wrong Password")
+        setErrorState(true);
+        setErrorMessage("Error: Wrong Password");
         break;
       default:
-        setErrorState(true)
-        setErrorMessage("Oops. Something went wrong. Please Try Again")
+        setErrorState(true);
+        setErrorMessage("Oops. Something went wrong. Please Try Again");
     }
-  }
+  };
   return (
     <>
       <h2>Reauthenticate to Continue</h2>
@@ -71,7 +65,7 @@ const Reauthenticate = () => {
               type="email"
               onChange={handleChange}
               placeholder="email"
-              maxLength='24'
+              maxLength="24"
               required
             />
           </div>
@@ -83,25 +77,20 @@ const Reauthenticate = () => {
               type="password"
               onChange={handleChange}
               placeholder="password"
-              maxLength='24'
+              maxLength="24"
               required
             />
           </div>
           <input
-           className={loggingIn
-            ? "btn-submit logging-in"
-            : "btn-submit"
-           }
-           type="submit"
-           value={loggingIn
-            ? "Authenticating..."
-            : "Authenticate"}
+            className={loggingIn ? "btn-submit logging-in" : "btn-submit"}
+            type="submit"
+            value={loggingIn ? "Authenticating..." : "Authenticate"}
           />
         </form>
-        {errorState && <span className='error-msg'>{errorMessage}</span>}
+        {errorState && <span className="error-msg">{errorMessage}</span>}
       </div>
     </>
   );
 };
 
-export default Reauthenticate
+export default Reauthenticate;

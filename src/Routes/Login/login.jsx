@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useUserAuth } from "../../Auth/authentication-context.js";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 
 const Login = ({ changeLoginState }) => {
@@ -8,8 +8,8 @@ const Login = ({ changeLoginState }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [errorState, setErrorState] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorState, setErrorState] = useState(false);
 
   const { logIn } = useUserAuth();
 
@@ -22,8 +22,8 @@ const Login = ({ changeLoginState }) => {
       setLoggingIn(false);
       navigate("/chat");
     } catch (error) {
-      const code = error.code
-      console.log(error.code)
+      const code = error.code;
+      console.log(error.code);
       handleErrors(code);
       setLoggingIn(false);
     }
@@ -31,7 +31,7 @@ const Login = ({ changeLoginState }) => {
 
   const handleChange = (e) => {
     const target = e.target;
-    setErrorState(false)
+    setErrorState(false);
     target.id === "email"
       ? setEmail(e.target.value)
       : setPassword(e.target.value);
@@ -40,18 +40,18 @@ const Login = ({ changeLoginState }) => {
   const handleErrors = (errorCode) => {
     switch (errorCode) {
       case "auth/user-not-found":
-        setErrorState(true)
-        setErrorMessage("Error: User not Found")
+        setErrorState(true);
+        setErrorMessage("Error: User not Found");
         break;
       case "auth/wrong-password":
-        setErrorState(true)
-        setErrorMessage("Error: Wrong Password")
+        setErrorState(true);
+        setErrorMessage("Error: Wrong Password");
         break;
       default:
-        setErrorState(true)
-        setErrorMessage("Oops. Something went wrong. Please Try Again")
+        setErrorState(true);
+        setErrorMessage("Oops. Something went wrong. Please Try Again");
     }
-  }
+  };
 
   return (
     <>
@@ -66,7 +66,7 @@ const Login = ({ changeLoginState }) => {
               type="email"
               onChange={handleChange}
               placeholder="email"
-              maxLength='24'
+              maxLength="24"
               required
             />
           </div>
@@ -78,22 +78,17 @@ const Login = ({ changeLoginState }) => {
               type="password"
               onChange={handleChange}
               placeholder="password"
-              maxLength='24'
+              maxLength="24"
               required
             />
           </div>
           <input
-           className={loggingIn
-            ? "btn-submit logging-in"
-            : "btn-submit"
-           }
-           type="submit"
-           value={loggingIn
-            ? "Logging in..."
-            : "Login"}
+            className={loggingIn ? "btn-submit logging-in" : "btn-submit"}
+            type="submit"
+            value={loggingIn ? "Logging in..." : "Login"}
           />
         </form>
-        {errorState && <span className='error-msg'>{errorMessage}</span>}
+        {errorState && <span className="error-msg">{errorMessage}</span>}
       </div>
       <div className="account-switch-container">
         <p className="no-account-text">

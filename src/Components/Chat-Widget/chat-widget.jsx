@@ -1,21 +1,23 @@
 import { useContext } from "react";
-import ChatContext from "../../Current/current-chat-context.js"
+import ChatContext from "../../Current/current-chat-context.js";
 import "./chat-widget.css";
 
 const ChatWidget = ({ chat, mobileNav, showNav }) => {
-  const {currentChat, changeChatroom} = useContext(ChatContext)
+  const { currentChat, changeChatroom } = useContext(ChatContext);
 
   const switchChatroom = (e) => {
     if (mobileNav) {
-      showNav()
+      showNav();
     }
-    changeChatroom(e)
-  }
+    changeChatroom(e);
+  };
 
   return (
     <li key={chat.id}>
-      <div onClick={switchChatroom} className={
-        currentChat === chat.name.toLowerCase()
+      <div
+        onClick={switchChatroom}
+        className={
+          currentChat === chat.name.toLowerCase()
             ? "chat-widget active-chat"
             : "chat-widget"
         }

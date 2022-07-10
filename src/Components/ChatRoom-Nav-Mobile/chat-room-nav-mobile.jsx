@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import {
   collection,
   doc,
@@ -10,7 +10,6 @@ import { db } from "../../firebase-config.js";
 import "./chat-room-nav-mobile.css";
 import { HiSearch } from "react-icons/hi";
 import ChatWidget from "../../Components/Chat-Widget/chat-widget.jsx";
-import ChatContext from "../../Current/current-chat-context.js";
 
 const ChatNavMobile = ({ showNav, mobileNav }) => {
   const [chatroom, setChatroom] = useState("");

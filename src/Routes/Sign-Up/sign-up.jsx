@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { auth } from "../../firebase-config.js"
+import { auth } from "../../firebase-config.js";
 import { useUserAuth } from "../../Auth/authentication-context.js";
-import { updateProfile, getIdTokenResult, reload } from "firebase/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import ProfileImage from "../../Assets/Images/undraw_profile_pic_ic-5-t.svg";
 import "./sign-up.css";
 
@@ -12,10 +12,10 @@ const SignUp = ({ changeLoginState }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [registering, setRegistering] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [errorState, setErrorState] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorState, setErrorState] = useState(false);
 
-  const { signUp, user } = useUserAuth();
+  const { signUp } = useUserAuth();
 
   const handleChange = (e) => {
     const target = e.target;
@@ -38,15 +38,15 @@ const SignUp = ({ changeLoginState }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setRegistering(true);
-    setErrorState(false)
+    setErrorState(false);
     try {
       await signUp(email, password);
-      await handleUpdateProfile()
+      await handleUpdateProfile();
       setRegistering(false);
       navigate("/chat");
     } catch (error) {
-      const code = error.code
-      handleErrors(code)
+      const code = error.code;
+      handleErrors(code);
       console.log(error.code);
       setRegistering(false);
     }
@@ -58,30 +58,30 @@ const SignUp = ({ changeLoginState }) => {
         displayName: userName,
         photoURL: ProfileImage,
       });
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const handleErrors = (errorCode) => {
     switch (errorCode) {
       case "auth/email-already-exists":
-        setErrorState(true)
-        setErrorMessage("Error: Email already exists")
+        setErrorState(true);
+        setErrorMessage("Error: Email already exists");
         break;
       case "auth/invalid-email":
-        setErrorState(true)
-        setErrorMessage("Error: Invalid Email Address")
+        setErrorState(true);
+        setErrorMessage("Error: Invalid Email Address");
         break;
       case "auth/weak-password":
-        setErrorState(true)
-        setErrorMessage("Error: Password must be at least 6 chars long")
+        setErrorState(true);
+        setErrorMessage("Error: Password must be at least 6 chars long");
         break;
       default:
-        setErrorState(true)
-        setErrorMessage("Oops. Something went wrong. Please Try Again")
+        setErrorState(true);
+        setErrorMessage("Oops. Something went wrong. Please Try Again");
     }
-  }
+  };
 
   return (
     <>
@@ -96,7 +96,7 @@ const SignUp = ({ changeLoginState }) => {
               type="text"
               onChange={handleChange}
               placeholder="username"
-              maxLength='20'
+              maxLength="20"
               required
             />
           </div>
@@ -108,7 +108,7 @@ const SignUp = ({ changeLoginState }) => {
               type="email"
               onChange={handleChange}
               placeholder="email"
-              maxLength='24'
+              maxLength="24"
               required
             />
           </div>
@@ -120,22 +120,17 @@ const SignUp = ({ changeLoginState }) => {
               type="password"
               onChange={handleChange}
               placeholder="password"
-              maxLength='24'
+              maxLength="24"
               required
             />
           </div>
           <input
-            className={registering
-             ? "btn-submit logging-in"
-             : "btn-submit"
-            }
+            className={registering ? "btn-submit logging-in" : "btn-submit"}
             type="submit"
-            value={registering
-              ? "Signing Up..."
-              : "Sign Up!"}
+            value={registering ? "Signing Up..." : "Sign Up!"}
           />
         </form>
-        {errorState && <span className='error-msg'>{errorMessage}</span>}
+        {errorState && <span className="error-msg">{errorMessage}</span>}
       </div>
       <div className="account-switch-container">
         <p className="no-account-text">

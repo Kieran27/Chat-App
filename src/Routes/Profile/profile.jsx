@@ -1,13 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { auth, storage } from "../../firebase-config.js";
-import { updateProfile, deleteUser, updateEmail, updatePassword } from "firebase/auth";
+import {
+  updateProfile,
+  deleteUser,
+  updateEmail,
+  updatePassword,
+} from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useUserAuth } from "../../Auth/authentication-context.js";
 import Header from "../../Components/Header/header.jsx";
 import Footer from "../../Components/Footer/footer.jsx";
 import DeleteAccountModal from "../../Modals/delete-account-modal.jsx";
 import ReauthenticateModal from "../../Modals/reauthenticate-modal.jsx";
-import ErrorPopup from "../../Components/Error-Popup/error-popup.jsx"
+import ErrorPopup from "../../Components/Error-Popup/error-popup.jsx";
 import { HiPencil } from "react-icons/hi";
 import { BiImageAdd } from "react-icons/bi";
 import "./profile.css";
@@ -35,7 +40,7 @@ const Profile = () => {
   const [showReauthenticateModal, setShowReauthenticateModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const [errorPopup, setErrorPopup] = useState(false);
-  const hiddenRef = useRef(null)
+  const hiddenRef = useRef(null);
 
   const backgroundImg = {
     backgroundImage: `url(${photoURL})`,
@@ -53,16 +58,16 @@ const Profile = () => {
   useEffect(() => {
     if (errorPopup) {
       setTimeout(() => {
-        setErrorPopup(false)
-      }, 1000)
+        setErrorPopup(false);
+      }, 1000);
     }
-  }, [errorPopup])
+  }, [errorPopup]);
 
   useEffect(() => {
     if (imgFile) {
-      updateProfilePhoto()
+      updateProfilePhoto();
     }
-  },[imgFile])
+  }, [imgFile]);
 
   const enableForm = (e) => {
     const parent = e.currentTarget.parentElement;
@@ -88,16 +93,16 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = e.target.parentElement.id;
-    console.log(id)
+    console.log(id);
     switch (id) {
       case "edit-username":
         handleNameChange();
         break;
       case "edit-email":
-        handleEmailChange()
+        handleEmailChange();
         break;
       case "edit-password":
-        handlePasswordChange()
+        handlePasswordChange();
         break;
       default:
         return false;
@@ -133,12 +138,12 @@ const Profile = () => {
       case "auth/requires-recent-login":
         displayReauthenticateModal();
         setErrorPopup(true);
-        setErrorMessage(errorCode)
+        setErrorMessage(errorCode);
         break;
       default:
         displayReauthenticateModal();
         setErrorPopup(true);
-        setErrorMessage("Oops Something Went Wrong")
+        setErrorMessage("Oops Something Went Wrong");
     }
   };
 
@@ -146,7 +151,7 @@ const Profile = () => {
     try {
       await deleteUser(user);
     } catch (error) {
-      handleErrors(error.code)
+      handleErrors(error.code);
       alert(error.message);
       setShowDeleteModal(false);
     }
@@ -164,8 +169,8 @@ const Profile = () => {
       setImgUploading(false);
       window.location.reload();
     } catch (error) {
-      const code = error.code
-      handleErrors(code)
+      const code = error.code;
+      handleErrors(code);
     }
   };
 
@@ -176,46 +181,46 @@ const Profile = () => {
         displayName: username,
       });
       setFieldChanging(false);
-      window.location.reload()
-      alert("Displayname Changed Successfully!")
+      window.location.reload();
+      alert("Displayname Changed Successfully!");
     } catch (error) {
-      const code = error.code
-      handleErrors(code)
+      const code = error.code;
+      handleErrors(code);
     }
   };
 
   const handleEmailChange = async () => {
     try {
-      await updateEmail(user, email)
+      await updateEmail(user, email);
       setEmailChanging(false);
-      alert("Email Changed Successfully!")
-      window.location.reload()
+      alert("Email Changed Successfully!");
+      window.location.reload();
     } catch (error) {
-      const code = error.code
+      const code = error.code;
       handleErrors(code);
     }
   };
 
   const handlePasswordChange = async (e) => {
     if (password !== newPassword) {
-      setErrorMessage("Passwords Must Match!")
+      setErrorMessage("Passwords Must Match!");
       setErrorPopup(true);
     } else {
       try {
-        await updatePassword(user, password)
+        await updatePassword(user, password);
         setPasswordChanging(false);
-        alert("Password Changed Successfully!")
-        window.location.reload()
+        alert("Password Changed Successfully!");
+        window.location.reload();
       } catch (error) {
-        const code = error.code
-        handleErrors(code)
+        const code = error.code;
+        handleErrors(code);
       }
     }
   };
 
   const simulatePhotoChange = async (e) => {
     await hiddenRef.current.click();
-  }
+  };
 
   const displayDeleteModal = () => {
     setShowDeleteModal(
@@ -240,10 +245,11 @@ const Profile = () => {
             deleteAccount={deleteAccount}
           />
         )}
-        {showReauthenticateModal &&
+        {showReauthenticateModal && (
           <ReauthenticateModal
-            displayReauthenticateModal = {displayReauthenticateModal}
-          />}
+            displayReauthenticateModal={displayReauthenticateModal}
+          />
+        )}
         {errorPopup && <ErrorPopup message={errorMessage} />}
         <div className="profile-container-left">
           <h2>Profile Info</h2>
@@ -267,9 +273,11 @@ const Profile = () => {
                 <input
                   type="submit"
                   className="btn-field-submit"
-                  value={fieldChanging
-                    ? "Changing Displayname..."
-                    : "Change Displayname"}
+                  value={
+                    fieldChanging
+                      ? "Changing Displayname..."
+                      : "Change Displayname"
+                  }
                 />
               </fieldset>
             </form>
@@ -293,11 +301,9 @@ const Profile = () => {
                   />
                 </div>
                 <input
-                 type="submit"
-                 className="btn-field-submit"
-                 value={emailChanging
-                  ? "Changing Email..."
-                  : "Change Email" }
+                  type="submit"
+                  className="btn-field-submit"
+                  value={emailChanging ? "Changing Email..." : "Change Email"}
                 />
               </fieldset>
             </form>
@@ -334,9 +340,11 @@ const Profile = () => {
                 <input
                   type="submit"
                   className="btn-field-submit"
-                  value={passwordChanging
-                    ? "Changing Password..."
-                    : "Change Password"}
+                  value={
+                    passwordChanging
+                      ? "Changing Password..."
+                      : "Change Password"
+                  }
                 />
               </fieldset>
             </form>
@@ -350,10 +358,10 @@ const Profile = () => {
             <h3 className="user-display-name">{user?.displayName}</h3>
             <button className="file-input-btn" onClick={simulatePhotoChange}>
               <BiImageAdd />
-              { imgUploading ? "Changing..." : "Change"}
+              {imgUploading ? "Changing..." : "Change"}
             </button>
             <input
-              style={{display: "none"}}
+              style={{ display: "none" }}
               id="photo-file"
               name="Img-Avatar"
               className="file"
@@ -363,24 +371,6 @@ const Profile = () => {
               accept=".jpg, .png, .gif, .svg"
               required
             />
-            {/*<form id="edit-photoURL" onSubmit={handlePhotoChange}>
-                <label htmlFor="Img-Avatar"></label>
-                <input
-                  style={{display: "none"}}
-                  id="photo-file"
-                  name="Img-Avatar"
-                  className="file"
-                  type="file"
-                  ref={hiddenRef}
-                  onChange={handleChange}
-                  accept=".jpg, .png, .gif, .svg"
-                  required
-                />
-              <input
-                type="submit"
-                value={imgUploading ? "uploading..." : "upload"}
-              />
-            </form>*/}
           </div>
         </div>
       </div>

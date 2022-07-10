@@ -19,15 +19,6 @@ const ChatMessage = ({ message }) => {
     backgroundPosition: "center",
   };
 
-  const handleClick = async (id) => {
-    try {
-      await deleteDoc(doc(db, currentChat, id));
-      console.log("hello!");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const setPopupStatus = (e) => {
     setShowPopup((showPopup) => (showPopup = !showPopup));
   };
@@ -58,11 +49,13 @@ const ChatMessage = ({ message }) => {
             ""
           )}
           <p>{message.message}</p>
-          <span className={
-            user.uid === message.userId
-              ? "msg-sent-from-user"
-              : "msg-sent-from"
-          }>{`Sent from ${message.owner}`}</span>
+          <span
+            className={
+              user.uid === message.userId
+                ? "msg-sent-from-user"
+                : "msg-sent-from"
+            }
+          >{`Sent from ${message.owner}`}</span>
         </div>
       </div>
     </>

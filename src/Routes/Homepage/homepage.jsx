@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../Auth/authentication-context.js";
 import HeroImage from "../../Assets/Images/undraw_real_time_collaboration_c62i.svg";
 import Login from "../Login/login.jsx";
@@ -43,9 +43,6 @@ const HomePage = () => {
           ) : (
             <SignUp changeLoginState={changeLoginState} />
           )}
-          {/*<div className="homepage-right-footer">
-            <img src={HeroImage} alt="" />
-          </div>*/}
         </div>
       </div>
     </>

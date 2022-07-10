@@ -1,23 +1,22 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import ChatInput from "../../Components/Chat-Input/chat-input.jsx";
 import ChatMessage from "../../Components/Chat-Message/chat-message.jsx";
-import ChatContext from "../../Current/current-chat-context.js"
+import ChatContext from "../../Current/current-chat-context.js";
 import { db } from "../../firebase-config.js";
 import "./chat.css";
 import {
   collection,
-  getDocs,
   onSnapshot,
   limit,
   orderBy,
   query,
 } from "firebase/firestore";
 
-const Chat = ({showNav}) => {
+const Chat = ({ showNav }) => {
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(true);
   const dummyRef = useRef(null);
-  const {currentChat} = useContext(ChatContext)
+  const { currentChat } = useContext(ChatContext);
 
   useEffect(() => {
     const msgRef = !currentChat
@@ -45,7 +44,7 @@ const Chat = ({showNav}) => {
 
   useEffect(() => {
     scrollIntoView();
-  },[messages])
+  }, [messages]);
 
   return (
     <div className="chat-room-container">

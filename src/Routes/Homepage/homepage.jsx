@@ -4,6 +4,7 @@ import { useUserAuth } from "../../Auth/authentication-context.js";
 import HeroImage from "../../Assets/Images/undraw_real_time_collaboration_c62i.svg";
 import Login from "../Login/login.jsx";
 import SignUp from "../Sign-Up/sign-up.jsx";
+import SigninAsTest from "../../Components/Sign-In-Test/sign-in-test.jsx";
 import "./homepage.css";
 
 const HomePage = () => {
@@ -43,6 +44,7 @@ const HomePage = () => {
           ) : (
             <SignUp changeLoginState={changeLoginState} />
           )}
+          <SigninAsTest />
         </div>
       </div>
     </>

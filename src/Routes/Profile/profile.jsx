@@ -13,6 +13,7 @@ import Footer from "../../Components/Footer/footer.jsx";
 import DeleteAccountModal from "../../Modals/delete-account-modal.jsx";
 import ReauthenticateModal from "../../Modals/reauthenticate-modal.jsx";
 import ErrorPopup from "../../Components/Error-Popup/error-popup.jsx";
+import { guestID } from "../../Utility/helper-functions.js"
 import { HiPencil } from "react-icons/hi";
 import { BiImageAdd } from "react-icons/bi";
 import "./profile.css";
@@ -140,6 +141,11 @@ const Profile = () => {
         setErrorPopup(true);
         setErrorMessage(errorCode);
         break;
+      case "guest account":
+        displayReauthenticateModal();
+        setErrorPopup(true);
+        setErrorMessage("Cannot Perform Action on Guest Account");
+        break;
       default:
         displayReauthenticateModal();
         setErrorPopup(true);
@@ -148,12 +154,16 @@ const Profile = () => {
   };
 
   const deleteAccount = async () => {
-    try {
-      await deleteUser(user);
-    } catch (error) {
-      handleErrors(error.code);
-      alert(error.message);
-      setShowDeleteModal(false);
+    if (user.uid === guestID) {
+      handleErrors("guest account")
+    } else {
+      try {
+        await deleteUser(user);
+      } catch (error) {
+        handleErrors(error.code);
+        alert(error.message);
+        setShowDeleteModal(false);
+      }
     }
   };
 
@@ -190,14 +200,18 @@ const Profile = () => {
   };
 
   const handleEmailChange = async () => {
-    try {
-      await updateEmail(user, email);
-      setEmailChanging(false);
-      alert("Email Changed Successfully!");
-      window.location.reload();
-    } catch (error) {
-      const code = error.code;
-      handleErrors(code);
+    if (user.uid === guestID) {
+      handleErrors("guest account")
+    } else {
+      try {
+        await updateEmail(user, email);
+        setEmailChanging(false);
+        alert("Email Changed Successfully!");
+        window.location.reload();
+      } catch (error) {
+        const code = error.code;
+        handleErrors(code);
+      }
     }
   };
 
@@ -205,6 +219,8 @@ const Profile = () => {
     if (password !== newPassword) {
       setErrorMessage("Passwords Must Match!");
       setErrorPopup(true);
+    } else if (user.uid === guestID) {
+      handleErrors("guest account")
     } else {
       try {
         await updatePassword(user, password);

@@ -1,13 +1,4 @@
-import { useUserAuth } from "../../Auth/authentication-context.js"
-
-const { user } = useUserAuth();
-
-export function foo() {
-    // ...
-}
-export function bar() {
-    // ...
-}
+export const guestID = "Ge4akpBP8IhrxijmyaUqMBfUNtD3"
 
 export const userBackgroundImage = {
   backgroundImage : 'url',

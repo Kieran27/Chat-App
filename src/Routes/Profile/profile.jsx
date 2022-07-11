@@ -60,7 +60,7 @@ const Profile = () => {
     if (errorPopup) {
       setTimeout(() => {
         setErrorPopup(false);
-      }, 1000);
+      }, 1250);
     }
   }, [errorPopup]);
 

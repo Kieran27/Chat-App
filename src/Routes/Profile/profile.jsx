@@ -145,6 +145,7 @@ const Profile = () => {
         displayReauthenticateModal();
         setErrorPopup(true);
         setErrorMessage("Cannot Perform Action on Guest Account");
+        setShowReauthenticateModal(false);
         break;
       default:
         displayReauthenticateModal();

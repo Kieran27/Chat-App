@@ -205,6 +205,7 @@ const Profile = () => {
       handleErrors("guest account")
     } else {
       try {
+        setEmailChanging(true)
         await updateEmail(user, email);
         setEmailChanging(false);
         alert("Email Changed Successfully!");
@@ -212,6 +213,7 @@ const Profile = () => {
       } catch (error) {
         const code = error.code;
         handleErrors(code);
+        setEmailChanging(false)
       }
     }
   };
@@ -224,12 +226,14 @@ const Profile = () => {
       handleErrors("guest account")
     } else {
       try {
+        setPasswordChanging(true)
         await updatePassword(user, password);
         setPasswordChanging(false);
         alert("Password Changed Successfully!");
         window.location.reload();
       } catch (error) {
         const code = error.code;
+        setPasswordChanging(false)
         handleErrors(code);
       }
     }

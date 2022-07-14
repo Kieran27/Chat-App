@@ -12,8 +12,10 @@ import { HiSearch } from "react-icons/hi";
 import ChatWidget from "../../Components/Chat-Widget/chat-widget.jsx";
 
 const ChatRoomNav = () => {
+  const [backupChatroom, setBackupChatroom] = useState(null);
   const [chatroom, setChatroom] = useState("");
   const [chatroomCollection, setChatRoomCollection] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +33,11 @@ const ChatRoomNav = () => {
     setChatroom(e.target.value);
   };
 
+  const handleSearch = (e) => {
+    const filteredValue = e.target.value.toLowerCase();
+    setSearchValue(filteredValue);
+  }
+
   useEffect(() => {
     const msgRef = collection(db, "chatrooms");
     const unsub = onSnapshot(msgRef, (snapshot) => {
@@ -39,9 +46,24 @@ const ChatRoomNav = () => {
         id: docs.id,
       }));
       setChatRoomCollection(messageData);
+      setBackupChatroom(messageData);
     });
     return unsub;
   }, []);
+
+  useEffect(() => {
+    const filterSearch = () => {
+      const filteredResults = backupChatroom?.filter((item) => {
+        if (searchValue === "" ) {
+          return backupChatroom
+        } else {
+          return item.id.includes(searchValue)
+        }
+      })
+      setChatRoomCollection(filteredResults)
+    }
+    filterSearch()
+  }, [searchValue])
 
   return (
     <aside className="chat-room-nav-container">
@@ -49,7 +71,12 @@ const ChatRoomNav = () => {
       <div className="chat-room-nav-container-body">
         <div className="chat-room-nav-search-container">
           <HiSearch className="search-icon" />
-          <input type="search" placeholder="search chatter" />
+          <input
+            type="search"
+            placeholder="search chatter"
+            value={searchValue}
+            onChange={handleSearch}
+          />
         </div>
         <nav>
           <ul>

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import ChatContext from "../../Current/current-chat-context.js";
+import ChatWidgetImg from "../../Assets/Images/chat-widget-img.png"
 import "./chat-widget.css";
 
 const ChatWidget = ({ chat, mobileNav, showNav }) => {

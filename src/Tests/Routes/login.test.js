@@ -6,7 +6,6 @@ import { UserAuthContextProvider } from "../../Auth/authentication-context.js"
 import Login from "../../Routes/Login/login.jsx"
 
 describe("Login Component", () => {
-  const { user, logIn } = useUserAuth();
   it ("component renders", () => {
     render(
       <UserAuthContextProvider>
@@ -17,9 +16,4 @@ describe("Login Component", () => {
     )
   })
 
-  it("user logins with correct credential", async () => {
-    const testTest = await logIn("test@email.com", "working")
-
-    expect(user).toBeTruthy();
-  })
 })

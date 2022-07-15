@@ -12,7 +12,6 @@ const ChatRoomPage = () => {
 
   const displayMobileNav = () => {
     setMobileNav((mobileNav) => (mobileNav = !mobileNav));
-    console.log("hello!");
   };
   return (
     <>

@@ -1,4 +1,3 @@
-import React from 'react'
 import "./modals.css"
 import { useUserAuth } from "../Auth/authentication-context.js";
 

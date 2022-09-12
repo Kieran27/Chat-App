@@ -1,4 +1,4 @@
-#Chatter
+# Chatter
 
 > A fullstack chat app bulit with React and Firebase.
 

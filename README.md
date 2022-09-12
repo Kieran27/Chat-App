@@ -1,6 +1,6 @@
 # Chatter
 
-> A fullstack chat app bulit with React and Firebase.
+> A fullstack real-time chat app bulit with React and Firebase.
 
 ## Table of contents
 
@@ -28,6 +28,7 @@
 ## Features
 
 - Create and delete chat messages and chats
+- Realtime updates and messages via Firebase's onSnapshot listener
 - Create, update and delete profile and profile information
 - Chat with emojis
 - Full user authentication via Firebase Auth
